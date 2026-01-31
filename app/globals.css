@@ -1,1 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
+
+/* Design System CSS Variables */
+:root {
+  /* Dark Mode (Default) */
+  --bg-dark: #0B0E0F;
+  --surface-dark: #121618;
+  --accent-primary: #22D3EE;
+  --accent-secondary: #38BDF8;
+  --text-primary: #FFFFFF;
+  --text-muted: #9CA3AF;
+
+  /* Light Mode */
+  --bg-light: #FFFFFF;
+  --surface-light: #F3F4F6;
+  --accent-primary-light: #2563EB;
+  --text-dark: #0B0E0F;
+
+  /* Current Theme (Dark by default) */
+  --bg: var(--bg-dark);
+  --surface: var(--surface-dark);
+  --accent: var(--accent-primary);
+  --text: var(--text-primary);
+  --text-secondary: var(--text-muted);
+}
+
+html.light-mode {
+  --bg: var(--bg-light);
+  --surface: var(--surface-light);
+  --accent: var(--accent-primary-light);
+  --text: var(--text-dark);
+  --text-secondary: #6B7280;
+}
+
+/* Base Styles */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.6s cubic-bezier(0.23, 1, 0.320, 1),
+              color 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+body {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection Color */
+::selection {
+  background-color: var(--accent);
+  color: var(--bg);
+}
+
+/* Utilities */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-padding {
+  padding: 6rem 0;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 4rem 0;
+  }
+}
