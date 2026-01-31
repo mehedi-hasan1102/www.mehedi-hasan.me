@@ -77,14 +77,32 @@ export default function Skills() {
 
   return (
     <section
+      id="skills"
       ref={sectionRef}
       className="section-padding relative overflow-hidden"
       style={{ background: 'var(--bg)' }}
     >
-      <div className="container">
-        {/* Heading */}
+      {/* Animated background circles */}
+      <div className="absolute -top-1/2 -right-1/4 w-96 h-96 rounded-full opacity-5" style={{
+        background: 'radial-gradient(circle, var(--accent) 0%, transparent 70%)',
+        filter: 'blur(80px)',
+      }} />
+      <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 rounded-full opacity-5" style={{
+        background: 'radial-gradient(circle, var(--accent) 0%, transparent 70%)',
+        filter: 'blur(80px)',
+      }} />
+
+      <div className="container relative z-10">
+        {/* Animated heading */}
         <div className="mb-16 max-w-2xl">
-          <h2 style={{ color: 'var(--text)' }}>Technical Arsenal</h2>
+          <h2 className="text-5xl font-bold mb-4" style={{ 
+            color: 'var(--text)',
+            background: 'linear-gradient(135deg, var(--text) 0%, var(--accent) 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}>
+            Technical Arsenal
+          </h2>
           <p
             className="text-lg mt-4"
             style={{ color: 'var(--text-secondary)' }}
@@ -92,14 +110,17 @@ export default function Skills() {
             A comprehensive toolkit for building modern, performant, and
             beautifully animated web experiences.
           </p>
+          <div className="w-24 h-1 rounded-full mt-4" style={{
+            background: 'linear-gradient(90deg, var(--accent), transparent)',
+          }} />
         </div>
 
         {/* Skills by Category */}
-        <div ref={containerRef} className="space-y-12">
+        <div ref={containerRef} className="space-y-16">
           {categories.map((category) => (
             <div key={category}>
               <h3
-                className="text-lg font-semibold mb-6"
+                className="text-lg font-semibold mb-6 uppercase tracking-widest"
                 style={{ color: 'var(--accent)' }}
               >
                 {category}
@@ -108,39 +129,60 @@ export default function Skills() {
               <div className="grid md:grid-cols-2 gap-6">
                 {skills
                   .filter((skill) => skill.category === category)
-                  .map((skill, idx) => (
+                  .map((skill) => (
                     <div
                       key={skill.name}
                       data-skill
-                      className="group"
+                      className="group p-5 rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                      style={{
+                        background: 'rgba(34, 211, 238, 0.05)',
+                        border: '1px solid rgba(34, 211, 238, 0.1)',
+                      }}
+                      onMouseEnter={(e) => {
+                        gsap.to(e.currentTarget, {
+                          background: 'rgba(34, 211, 238, 0.1)',
+                          borderColor: 'rgba(34, 211, 238, 0.3)',
+                          duration: 0.3,
+                        });
+                      }}
+                      onMouseLeave={(e) => {
+                        gsap.to(e.currentTarget, {
+                          background: 'rgba(34, 211, 238, 0.05)',
+                          borderColor: 'rgba(34, 211, 238, 0.1)',
+                          duration: 0.3,
+                        });
+                      }}
                     >
                       {/* Skill Header */}
                       <div className="flex justify-between items-center mb-3">
                         <span
-                          className="font-medium"
+                          className="font-semibold"
                           style={{ color: 'var(--text)' }}
                         >
                           {skill.name}
                         </span>
                         <span
-                          className="text-sm font-semibold"
-                          style={{ color: 'var(--accent)' }}
+                          className="text-sm font-bold px-3 py-1 rounded-full"
+                          style={{ 
+                            background: 'var(--accent)',
+                            color: 'var(--bg)',
+                          }}
                         >
                           {skill.level}/10
                         </span>
                       </div>
 
-                      {/* Skill Bar */}
+                      {/* Skill Bar with enhanced styling */}
                       <div
-                        className="h-2 rounded-full overflow-hidden relative"
-                        style={{ background: 'var(--surface)' }}
+                        className="h-3 rounded-full overflow-hidden relative group"
+                        style={{ background: 'rgba(255, 255, 255, 0.1)' }}
                       >
                         {/* Background animated gradient */}
                         <div
-                          className="absolute inset-0 opacity-20"
+                          className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity"
                           style={{
-                            background: `linear-gradient(90deg, var(--accent), var(--accent-secondary))`,
-                            filter: 'blur(4px)',
+                            background: `linear-gradient(90deg, var(--accent), #06b6d4)`,
+                            filter: 'blur(2px)',
                           }}
                         />
 
@@ -149,10 +191,10 @@ export default function Skills() {
                           data-skill-bar
                           className="h-full rounded-full transition-all duration-500"
                           style={{
-                            background: `linear-gradient(90deg, var(--accent), var(--accent-secondary))`,
+                            background: `linear-gradient(90deg, var(--accent), #06b6d4)`,
                             width: '0%',
                             boxShadow:
-                              '0 0 20px rgba(34, 211, 238, 0.5)',
+                              '0 0 15px rgba(34, 211, 238, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.2)',
                           }}
                         />
                       </div>

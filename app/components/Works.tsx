@@ -61,6 +61,7 @@ export default function Works() {
           opacity: 0,
           y: 60,
           x: index % 2 === 0 ? -40 : 40,
+          rotationY: index % 2 === 0 ? 10 : -10,
         });
       });
     }, sectionRef);
@@ -73,26 +74,46 @@ export default function Works() {
     const card = document.querySelector(`[data-work-id="${id}"]`);
     if (card) {
       gsap.to(card, {
-        y: isHovering ? -12 : 0,
+        y: isHovering ? -16 : 0,
+        rotationZ: isHovering ? 2 : 0,
+        scale: isHovering ? 1.02 : 1,
         boxShadow: isHovering
-          ? '0 20px 50px rgba(34, 211, 238, 0.3)'
+          ? '0 30px 60px rgba(34, 211, 238, 0.25)'
           : '0 10px 30px rgba(0, 0, 0, 0.2)',
         duration: 0.4,
-        ease: 'power2.out',
+        ease: 'power3.out',
       });
+
+      // Animate image overlay
+      const image = card.querySelector('[data-work-image]');
+      if (image) {
+        gsap.to(image, {
+          scale: isHovering ? 1.1 : 1,
+          duration: 0.6,
+          ease: 'power2.out',
+        });
+      }
     }
   };
 
   return (
     <section
+      id="works"
       ref={sectionRef}
       className="section-padding relative overflow-hidden"
       style={{ background: 'var(--surface)' }}
     >
       <div className="container">
-        {/* Heading */}
+        {/* Animated heading */}
         <div className="mb-16">
-          <h2 style={{ color: 'var(--text)' }}>Selected Works</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ 
+            color: 'var(--text)',
+            background: 'linear-gradient(135deg, var(--text) 0%, var(--accent) 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}>
+            Selected Works
+          </h2>
           <p
             className="text-lg mt-4 max-w-2xl"
             style={{ color: 'var(--text-secondary)' }}
@@ -104,28 +125,56 @@ export default function Works() {
 
         {/* Works Grid */}
         <div className="grid md:grid-cols-3 gap-6">
-          {works.map((work) => (
+          {works.map((work, idx) => (
             <div
               key={work.id}
               data-work-id={work.id}
-              className="work-card group relative rounded-2xl overflow-hidden cursor-pointer"
+              className="work-card group relative rounded-2xl overflow-hidden cursor-pointer perspective"
               onMouseEnter={() => handleHover(work.id, true)}
               onMouseLeave={() => handleHover(work.id, false)}
               style={{
                 background: 'var(--bg)',
-                border: `1px solid var(--accent)`,
+                border: `1px solid rgba(34, 211, 238, 0.3)`,
                 transition: 'all 0.3s ease',
+                transformStyle: 'preserve-3d',
               }}
             >
-              {/* Image Placeholder */}
-              <div
-                className={`bg-gradient-to-br ${work.image} h-48 w-full opacity-90 group-hover:opacity-100 transition-opacity`}
-              />
+              {/* Animated border glow */}
+              {hoveredId === work.id && (
+                <div
+                  className="absolute inset-0 rounded-2xl opacity-0"
+                  style={{
+                    background: `linear-gradient(135deg, transparent, rgba(34, 211, 238, 0.2), transparent)`,
+                    animation: 'shimmer 1.5s infinite',
+                  }}
+                />
+              )}
+
+              {/* Image Placeholder with zoom effect */}
+              <div className="relative h-48 overflow-hidden bg-gradient-to-br from-slate-700 to-slate-900">
+                <div
+                  data-work-image
+                  className={`bg-linear-to-br ${work.image} h-full w-full opacity-80 group-hover:opacity-100`}
+                  style={{
+                    background: `linear-gradient(135deg, var(--accent), #06b6d4)`,
+                  }}
+                />
+                {/* Index badge */}
+                <div
+                  className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs"
+                  style={{
+                    background: 'var(--accent)',
+                    color: 'var(--bg)',
+                  }}
+                >
+                  {(idx + 1).toString().padStart(2, '0')}
+                </div>
+              </div>
 
               {/* Content */}
-              <div className="p-6">
+              <div className="p-6 relative z-10">
                 <div
-                  className="text-sm font-semibold mb-2"
+                  className="text-sm font-semibold mb-2 uppercase tracking-widest"
                   style={{ color: 'var(--accent)' }}
                 >
                   {work.category}
@@ -143,12 +192,12 @@ export default function Works() {
                   {work.description}
                 </p>
 
-                {/* Tags */}
+                {/* Tags with animation */}
                 <div className="flex flex-wrap gap-2">
                   {work.tags.map((tag, idx) => (
                     <span
                       key={idx}
-                      className="px-3 py-1 text-xs rounded-full border"
+                      className="px-3 py-1 text-xs rounded-full border transition-all duration-300"
                       style={{
                         borderColor: 'var(--accent)',
                         color:

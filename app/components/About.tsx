@@ -11,6 +11,7 @@ export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
   const paragraphsRef = useRef<HTMLDivElement[]>([]);
+  const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -34,7 +35,7 @@ export default function About() {
         });
       }
 
-      // Animate paragraphs
+      // Animate paragraphs with parallax
       paragraphsRef.current.forEach((para, index) => {
         if (para) {
           gsap.from(para, {
@@ -42,13 +43,28 @@ export default function About() {
               trigger: sectionRef.current,
               start: `top ${80 + index * 10}%`,
               end: `top ${60 + index * 10}%`,
-              scrub: 0.5,
+              scrub: 1,
             },
             opacity: 0.3,
             x: -50,
           });
         }
       });
+
+      // Animate stats with counter
+      if (statsRef.current) {
+        gsap.from(statsRef.current.querySelectorAll('[data-stat]'), {
+          scrollTrigger: {
+            trigger: statsRef.current,
+            start: 'top 85%',
+            end: 'top 65%',
+            scrub: 0.5,
+          },
+          opacity: 0,
+          y: 30,
+          stagger: 0.1,
+        });
+      }
     }, sectionRef);
 
     return () => ctx.revert();
@@ -56,30 +72,44 @@ export default function About() {
 
   return (
     <section
+      id="about"
       ref={sectionRef}
       className="section-padding relative overflow-hidden"
       style={{ background: 'var(--bg)' }}
     >
-      <div className="container">
+      {/* Decorative elements */}
+      <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full opacity-10" style={{
+        background: 'radial-gradient(circle, var(--accent) 0%, transparent 70%)',
+        filter: 'blur(60px)',
+      }} />
+      <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full opacity-10" style={{
+        background: 'radial-gradient(circle, var(--accent) 0%, transparent 70%)',
+        filter: 'blur(60px)',
+      }} />
+
+      <div className="container relative z-10">
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          {/* Left side - Heading */}
+          {/* Left side - Heading with accent */}
           <div>
             <div
               ref={headingRef}
               style={{ color: 'var(--text)' }}
             >
-              <h2>About My Journey</h2>
+              <h2 className="text-5xl font-bold mb-4">About My Journey</h2>
+              <div className="w-16 h-1 rounded-full mb-8" style={{
+                background: 'linear-gradient(90deg, var(--accent), transparent)',
+              }} />
             </div>
           </div>
 
-          {/* Right side - Content */}
+          {/* Right side - Content with enhanced typography */}
           <div className="space-y-6">
             {[
               "I'm a creative developer obsessed with crafting beautiful digital experiences that merge motion design with purposeful interactivity. For the past 5 years, I've been pushing the boundaries of what's possible on the web.",
               "My work focuses on performance-first design, smooth animations, and creating moments of delight. I believe motion should tell stories, not distract from them.",
               "When I'm not designing or coding, I'm exploring new animation techniques, contributing to open-source projects, or writing about web performance and creative development.",
             ].map((text, index) => (
-              <p
+              <div
                 key={index}
                 ref={(el) => {
                   if (el) paragraphsRef.current[index] = el;
@@ -87,27 +117,55 @@ export default function About() {
                 className="text-lg leading-relaxed"
                 style={{ color: 'var(--text-secondary)' }}
               >
-                {text}
-              </p>
+                <div className="h-px w-8 mb-4 rounded-full" style={{
+                  background: 'var(--accent)',
+                  opacity: 0.3,
+                }} />
+                <p>{text}</p>
+              </div>
             ))}
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-8 mt-20 pt-20 border-t border-[var(--surface)]">
+        {/* Animated Stats */}
+        <div
+          ref={statsRef}
+          className="grid grid-cols-3 gap-8 mt-20 pt-20"
+          style={{ borderTop: '1px solid rgba(34, 211, 238, 0.2)' }}
+        >
           {[
             { number: '50+', label: 'Projects Completed' },
             { number: '15+', label: 'Clients Worldwide' },
             { number: '8', label: 'Awards & Recognition' },
           ].map((stat, index) => (
-            <div key={index} className="text-center">
+            <div
+              key={index}
+              data-stat
+              className="text-center p-6 rounded-xl transition-all duration-300 hover:scale-105"
+              style={{
+                background: 'rgba(34, 211, 238, 0.05)',
+                borderLeft: '3px solid var(--accent)',
+              }}
+              onMouseEnter={(e) => {
+                gsap.to(e.currentTarget, {
+                  background: 'rgba(34, 211, 238, 0.1)',
+                  duration: 0.3,
+                });
+              }}
+              onMouseLeave={(e) => {
+                gsap.to(e.currentTarget, {
+                  background: 'rgba(34, 211, 238, 0.05)',
+                  duration: 0.3,
+                });
+              }}
+            >
               <div
-                className="text-4xl font-bold mb-2"
+                className="text-5xl font-bold mb-2"
                 style={{ color: 'var(--accent)' }}
               >
                 {stat.number}
               </div>
-              <div style={{ color: 'var(--text-secondary)' }}>{stat.label}</div>
+              <div className="text-sm" style={{ color: 'var(--text-secondary)' }}>{stat.label}</div>
             </div>
           ))}
         </div>

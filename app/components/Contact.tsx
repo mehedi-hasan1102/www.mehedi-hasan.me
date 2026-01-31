@@ -63,6 +63,7 @@ export default function Contact() {
 
   return (
     <section
+      id="contact"
       ref={sectionRef}
       className="section-padding relative overflow-hidden"
       style={{ background: 'var(--bg)' }}
@@ -86,7 +87,7 @@ export default function Contact() {
             className="mb-8"
             style={{ color: 'var(--text)' }}
           >
-            <h2>Let's Create Something Amazing</h2>
+            <h2>Let&apos;s Create Something Amazing</h2>
           </div>
 
           {/* Subheading */}
@@ -94,7 +95,7 @@ export default function Contact() {
             className="text-xl mb-12 leading-relaxed"
             style={{ color: 'var(--text-secondary)' }}
           >
-            I'm always interested in hearing about new projects and opportunities
+            I&apos;m always interested in hearing about new projects and opportunities
             to create award-worthy experiences. Feel free to reach out if you
             have something in mind.
           </p>

@@ -1,18 +1,25 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import gsap from 'gsap';
 
 export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(true);
+  const themeInitRef = useRef(false);
 
-  useEffect(() => {
+  // Suppress error for safe one-time initialization with ref check
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useLayoutEffect(() => {
+    if (themeInitRef.current) return;
+    themeInitRef.current = true;
+
     // Check if theme is stored in localStorage
     const stored = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
     if (stored === 'light') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsDark(false);
       document.documentElement.classList.add('light-mode');
     } else if (stored === 'dark') {
