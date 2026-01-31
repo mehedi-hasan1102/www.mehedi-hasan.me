@@ -64,63 +64,20 @@ export default function Navbar() {
   };
 
   // ============================================
-  // NAVBAR HIDE/SHOW ON SCROLL
+  // NAVBAR ALWAYS VISIBLE (FIXED)
   // ============================================
   useEffect(() => {
-    let lastScrollY = 0;
-    let scrollTimeout: NodeJS.Timeout;
-
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       const isScrolling = currentScrollY > 50;
 
-      // Set background style
+      // Set background style only
       setScrolled(isScrolling);
-
-      // Hide/Show nav on scroll direction
-      if (navRef.current) {
-        if (currentScrollY > lastScrollY && currentScrollY > 100) {
-          // Scrolling down - hide
-          gsap.to(navRef.current, {
-            y: -100,
-            opacity: 0,
-            duration: 0.3,
-            ease: 'power2.inOut',
-          });
-        } else if (currentScrollY < lastScrollY) {
-          // Scrolling up - show
-          gsap.to(navRef.current, {
-            y: 0,
-            opacity: 1,
-            duration: 0.3,
-            ease: 'power2.inOut',
-          });
-        }
-      }
-
-      lastScrollY = currentScrollY;
-
-      // Clear timeout if scrolling
-      clearTimeout(scrollTimeout);
-
-      // Auto-show after user stops scrolling
-      scrollTimeout = setTimeout(() => {
-        if (navRef.current) {
-          gsap.to(navRef.current, {
-            y: 0,
-            opacity: 1,
-            duration: 0.3,
-            ease: 'power2.inOut',
-          });
-        }
-      }, 1000);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      clearTimeout(scrollTimeout);
-      if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
     };
   }, []);
 
@@ -314,29 +271,40 @@ export default function Navbar() {
         }}
       >
         <div className="container h-full flex items-center justify-between px-4 md:px-6">
-          {/* Logo - Left Side */}
+          {/* Logo - Left Side with Pill Background */}
           <Link
             href="/"
             onClick={scrollToTop}
-            className="text-lg md:text-xl font-bold hover:scale-110 active:scale-95"
+            className="text-lg md:text-xl font-bold hover:scale-110 active:scale-95 flex-shrink-0 px-4 py-2 rounded-full transition-all"
             style={{
+              background: 'rgba(34, 211, 238, 0.1)',
               color: 'var(--accent)',
               letterSpacing: '0.05em',
-              transition: 'transform 0.3s ease',
+              transition: 'transform 0.3s ease, background 0.3s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(34, 211, 238, 0.15)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(34, 211, 238, 0.1)';
             }}
           >
             MEHEDI<span style={{ fontSize: '0.75em', verticalAlign: 'super' }}>®</span>
           </Link>
 
-          {/* Desktop Navigation Links - Center */}
-          <div className="hidden lg:flex items-center gap-8">
+          {/* Desktop Navigation Links - Center (absolute center) with pill background */}
+          <div className="hidden lg:flex items-center gap-6 absolute left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-full" style={{
+            background: 'rgba(34, 211, 238, 0.08)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(34, 211, 238, 0.15)',
+          }}>
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onMouseEnter={handleLinkHover}
                 onMouseLeave={handleLinkHoverEnd}
-                className="relative font-medium text-sm cursor-pointer"
+                className="relative font-medium text-sm cursor-pointer whitespace-nowrap transition-colors"
                 style={{
                   color: 'var(--text)',
                   letterSpacing: '0.025em',
@@ -370,7 +338,7 @@ export default function Navbar() {
     type="button"
     aria-haspopup="true"
     aria-expanded={isDropdownOpen}
-    className="relative font-medium text-sm flex items-center gap-1 hover:scale-105 transition-transform"
+    className="relative font-medium text-sm flex items-center gap-1 hover:scale-105 transition-transform whitespace-nowrap"
     style={{
       color: isDropdownOpen ? 'var(--accent)' : 'var(--text)',
       letterSpacing: '0.025em',
@@ -457,11 +425,10 @@ export default function Navbar() {
   </div>
 </div>
 
-          </div>
-
-          {/* Right Side - Book a Call, Theme Toggle & Mobile Menu */}
-          <div className="flex items-center gap-3 md:gap-6">
-            {/* Book a Call CTA Button */}
+            {/* Divider */}
+            <div style={{ width: '1px', height: '24px', background: 'rgba(34, 211, 238, 0.2)' }} />
+            
+            {/* Book a Call CTA Button - Inside Pill */}
             <button
               onClick={() => {
                 const contactSection = document.getElementById('contact');
@@ -469,14 +436,14 @@ export default function Navbar() {
                   contactSection.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="px-3 md:px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 active:scale-95 text-xs md:text-sm"
+              className="px-5 py-1.5 rounded-full font-semibold transition-all duration-300 hover:scale-105 active:scale-95 text-sm whitespace-nowrap"
               style={{
                 background: 'var(--accent)',
                 color: 'var(--bg)',
               }}
               onMouseEnter={(e) => {
                 gsap.to(e.currentTarget, {
-                  boxShadow: '0 15px 35px rgba(34, 211, 238, 0.3)',
+                  boxShadow: '0 8px 20px rgba(34, 211, 238, 0.4)',
                   duration: 0.3,
                 });
               }}
@@ -489,16 +456,46 @@ export default function Navbar() {
             >
               Book a Call
             </button>
+          </div>
 
-            {/* Theme Toggle Button */}
+          {/* Right Side - Theme Toggle & Mobile Menu */}
+          <div className="flex items-center gap-3 md:gap-6 flex-shrink-0">
+
             <button
               data-theme-toggle-btn
               onClick={toggleTheme}
-              className="p-2 rounded-lg hover:scale-110 active:scale-95"
+              className="p-2 rounded-lg hover:scale-110 active:scale-95 hidden md:block"
               style={{
                 background: 'rgba(34, 211, 238, 0.1)',
                 color: 'var(--accent)',
-                transition: 'transform 0.3s ease',
+                transition: 'transform 0.3s ease, background 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(34, 211, 238, 0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(34, 211, 238, 0.1)';
+              }}
+              aria-label="Toggle theme"
+            >
+              {isDark ? <FaSun size={18} /> : <FaMoon size={18} />}
+            </button>
+
+            {/* Theme Toggle on Mobile */}
+            <button
+              data-theme-toggle-mobile
+              onClick={toggleTheme}
+              className="p-2 rounded-lg md:hidden"
+              style={{
+                background: 'rgba(34, 211, 238, 0.1)',
+                color: 'var(--accent)',
+                transition: 'transform 0.3s ease, background 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(34, 211, 238, 0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(34, 211, 238, 0.1)';
               }}
               aria-label="Toggle theme"
             >
