@@ -245,7 +245,7 @@
 }
 
 .skillTagName {
-  font-family: var(--font-staatliches), sans-serif;
+  font-family: 'Staatliches', serif;
   font-size: 0.8125rem;
   letter-spacing: 0.1em;
   color: var(--text);
@@ -357,7 +357,7 @@
 
 .orbitingSkill span {
   display: inline-block;
-  font-family: var(--font-staatliches), sans-serif;
+  font-family: 'Staatliches', serif;
   font-size: 0.6875rem;
   letter-spacing: 0.15em;
   color: var(--text);
