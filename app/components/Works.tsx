@@ -47,24 +47,34 @@ export default function Works() {
 
   // GSAP animations
   useEffect(() => {
-    if (works.length === 0) return;
+    if (works.length === 0 || !sectionRef.current) return;
 
     const ctx = gsap.context(() => {
       const cards = gsap.utils.toArray('.work-card') as Element[];
 
       cards.forEach((card, index) => {
-        gsap.from(card, {
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 90%',
-            end: 'top 70%',
-            scrub: 0.5,
+        gsap.fromTo(card, 
+          {
+            opacity: 0,
+            y: 60,
+            x: index % 2 === 0 ? -40 : 40,
+            rotationY: index % 2 === 0 ? 10 : -10,
           },
-          opacity: 0,
-          y: 60,
-          x: index % 2 === 0 ? -40 : 40,
-          rotationY: index % 2 === 0 ? 10 : -10,
-        });
+          {
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 90%',
+              end: 'top 70%',
+              scrub: 0.5,
+              onEnter: () => gsap.to(card, { opacity: 1, y: 0, x: 0, rotationY: 0, duration: 0.8 }),
+            },
+            opacity: 1,
+            y: 0,
+            x: 0,
+            rotationY: 0,
+            duration: 0.8,
+          }
+        );
       });
     }, sectionRef);
 
@@ -106,10 +116,10 @@ export default function Works() {
     return (
       <section
         id="works"
-        className="section-padding relative overflow-hidden"
+        className={styles.works}
         style={{ background: 'var(--surface)' }}
       >
-        <div className="container text-center" style={{ color: 'var(--text)' }}>
+        <div className={`container ${styles.worksLoading}`} style={{ color: 'var(--text)' }}>
           <p>Loading projects...</p>
         </div>
       </section>
@@ -120,22 +130,21 @@ export default function Works() {
     <section
       id="works"
       ref={sectionRef}
-      className="section-padding relative overflow-hidden"
+      className={styles.works}
       style={{ background: 'var(--surface)' }}
     >
       <div className="container">
         {/* Animated heading */}
-        <div className="mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ 
-            color: 'var(--text)',
-            background: 'linear-gradient(135deg, var(--text) 0%, var(--accent) 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-          }}>
+        <div className={styles.worksHeader}>
+          <h2 className={styles.worksTitle}
+            style={{ 
+              background: 'linear-gradient(135deg, var(--text) 0%, var(--accent) 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}>
             Selected Works
           </h2>
-          <p
-            className="text-lg mt-4 max-w-2xl"
+          <p className={styles.worksDescription}
             style={{ color: 'var(--text-secondary)' }}
           >
             Projects that showcase creative thinking, technical expertise, and
@@ -144,81 +153,66 @@ export default function Works() {
         </div>
 
         {/* Works Grid */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className={styles.worksGrid}>
           {works.map((work, idx) => (
             <div
               key={work.id}
               data-work-id={work.id}
-              className="work-card group relative rounded-2xl overflow-hidden cursor-pointer perspective"
+              className={`${styles.workCard} work-card`}
               onMouseEnter={() => handleHover(work.id, true)}
               onMouseLeave={() => handleHover(work.id, false)}
               onClick={() => handleProjectClick(work.slug)}
               style={{
-                background: 'var(--bg)',
                 border: `1px solid rgba(34, 211, 238, 0.3)`,
-                transition: 'all 0.3s ease',
-                transformStyle: 'preserve-3d',
               }}
             >
-              {/* Animated border glow */}
-              {hoveredId === work.id && (
-                <div
-                  className="absolute inset-0 rounded-2xl opacity-0"
-                  style={{
-                    background: `linear-gradient(135deg, transparent, rgba(34, 211, 238, 0.2), transparent)`,
-                    animation: 'shimmer 1.5s infinite',
-                  }}
-                />
-              )}
-
-              {/* Image Placeholder with zoom effect */}
-              <div className="relative h-48 overflow-hidden bg-gradient-to-br from-slate-700 to-slate-900">
+              {/* Image Section */}
+              <div className={styles.workImage}>
                 <div
                   data-work-image
-                  className={`h-full w-full opacity-80 group-hover:opacity-100`}
+                  className={styles.workImageGradient}
                   style={{
                     background: `linear-gradient(135deg, ${work.color}, #06b6d4)`,
                   }}
                 />
-                {/* Index badge */}
+                {/* Index Badge */}
                 <div
-                  className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs"
+                  className={styles.workImageBadge}
                   style={{
                     background: work.color,
-                    color: 'var(--bg)',
                   }}
                 >
                   {(idx + 1).toString().padStart(2, '0')}
                 </div>
               </div>
 
-              {/* Content */}
-              <div className="p-6 relative z-10">
+              {/* Content Section */}
+              <div className={styles.workContent}>
                 <div
-                  className="text-sm font-semibold mb-2 uppercase tracking-widest"
+                  className={styles.workCategory}
                   style={{ color: work.color }}
                 >
                   {work.category}
                 </div>
                 <h3
-                  className="text-xl font-bold mb-2"
+                  className={styles.workTitle}
                   style={{ color: 'var(--text)' }}
                 >
                   {work.title}
                 </h3>
                 <p
-                  className="text-sm mb-4 line-clamp-2"
+                  className={styles.workDescription}
                   style={{ color: 'var(--text-secondary)' }}
                 >
                   {work.shortDescription}
                 </p>
 
-                {/* Tags with animation */}
-                <div className="flex flex-wrap gap-2">
+                {/* Tags */}
+                <div className={styles.workTags}>
                   {work.tags.map((tag, idx) => (
                     <span
                       key={idx}
-                      className="px-3 py-1 text-xs rounded-full border transition-all duration-300"
+                      className={styles.workTag}
                       style={{
                         borderColor: work.color,
                         color:
@@ -227,7 +221,6 @@ export default function Works() {
                             : work.color,
                         background:
                           hoveredId === work.id ? work.color : 'transparent',
-                        transition: 'all 0.3s ease',
                       }}
                     >
                       {tag}
