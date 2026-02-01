@@ -98,38 +98,10 @@ const MagneticSkillTag = ({
     });
   }, [index]);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!tagRef.current) return;
-    const rect = tagRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-
-    gsap.to(tagRef.current, {
-      x: x * 0.4,
-      y: y * 0.4,
-      scale: 1.15,
-      duration: 0.3,
-      ease: "power2.out",
-    });
-  };
-
-  const handleMouseLeave = () => {
-    if (!tagRef.current) return;
-    gsap.to(tagRef.current, {
-      x: 0,
-      y: 0,
-      scale: 1,
-      duration: 0.5,
-      ease: "elastic.out(1, 0.3)",
-    });
-  };
-
   return (
     <div
       ref={tagRef}
       className={styles.magneticSkillTag}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
       style={{ "--skill-color": skill.color } as React.CSSProperties}
     >
       <span className={styles.skillTagIcon}>{skill.icon}</span>
@@ -213,7 +185,7 @@ const BentoCard = ({
       className={`${styles.bentoCard} ${isLarge ? styles.bentoCardLarge : ""}`}
       onMouseMove={handleMouseMove}
     >
-      <div ref={glowRef} className="bento-glow" />
+      <div ref={glowRef} className={styles.bentoGlow} />
       <div ref={contentRef} className={styles.bentoContent}>
         <div className={styles.bentoHeader}>
           <span className={styles.bentoNumber}>{String(index + 1).padStart(2, "0")}</span>
@@ -273,6 +245,59 @@ export default function Skills() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const orbitContainerRef = useRef<HTMLDivElement>(null);
+  const orbitCardRef = useRef<HTMLDivElement>(null);
+  const orbitGlowRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const header = headerRef.current;
+    const orbitContainer = orbitContainerRef.current;
+
+    if (!header) return;
+
+    gsap.set(header.children, { y: 80, opacity: 0 });
+
+    ScrollTrigger.create({
+      trigger: header,
+      start: "top 80%",
+      onEnter: () => {
+        gsap.to(header.children, {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.15,
+          ease: "power3.out",
+        });
+      },
+    });
+
+    // Orbit animation
+    if (orbitContainer) {
+      gsap.to(orbitContainer, {
+        rotation: 360,
+        duration: 60,
+        repeat: -1,
+        ease: "none",
+      });
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
+  const handleOrbitMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!orbitCardRef.current || !orbitGlowRef.current) return;
+    const rect = orbitCardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    gsap.to(orbitGlowRef.current, {
+      x: x,
+      y: y,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
 
   useEffect(() => {
     const header = headerRef.current;
@@ -338,7 +363,12 @@ export default function Skills() {
           ))}
 
           {/* Center Orbit Card */}
-          <div className={styles.bentoOrbitCard}>
+          <div 
+            ref={orbitCardRef}
+            className={styles.bentoOrbitCard}
+            onMouseMove={handleOrbitMouseMove}
+          >
+            <div ref={orbitGlowRef} className={styles.bentoGlow} />
             <div className={styles.orbitWrapper}>
               <div ref={orbitContainerRef} className={styles.orbitContainer}>
                 {orbitSkills.map((skill, index) => (
