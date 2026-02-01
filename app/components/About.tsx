@@ -13,7 +13,6 @@ export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
   const paragraphsRef = useRef<HTMLDivElement[]>([]);
-  const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -52,21 +51,6 @@ export default function About() {
           });
         }
       });
-
-      // Animate stats with counter
-      if (statsRef.current) {
-        gsap.from(statsRef.current.querySelectorAll('[data-stat]'), {
-          scrollTrigger: {
-            trigger: statsRef.current,
-            start: 'top 85%',
-            end: 'top 65%',
-            scrub: 0.5,
-          },
-          opacity: 0,
-          y: 30,
-          stagger: 0.1,
-        });
-      }
     }, sectionRef);
 
     return () => ctx.revert();
@@ -131,57 +115,11 @@ export default function About() {
                 className="text-lg leading-relaxed"
                 style={{ color: 'var(--text-secondary)' }}
               >
-                <div className="h-px w-8 mb-4 rounded-full" style={{
-                  background: 'var(--accent)',
-                  opacity: 0.3,
-                }} />
+               
                 <p>{text}</p>
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Animated Stats */}
-        <div
-          ref={statsRef}
-          className="grid grid-cols-3 gap-8 mt-20 pt-20"
-          style={{ borderTop: '1px solid rgba(34, 211, 238, 0.2)' }}
-        >
-          {[
-            { number: '100+', label: 'Web Projects' },
-            { number: '50+', label: 'GSAP Animations' },
-            { number: '5+', label: 'Years Experience' },
-          ].map((stat, index) => (
-            <div
-              key={index}
-              data-stat
-              className="text-center p-6 rounded-xl transition-all duration-300 hover:scale-105"
-              style={{
-                background: 'rgba(34, 211, 238, 0.05)',
-                borderLeft: '3px solid var(--accent)',
-              }}
-              onMouseEnter={(e) => {
-                gsap.to(e.currentTarget, {
-                  background: 'rgba(34, 211, 238, 0.1)',
-                  duration: 0.3,
-                });
-              }}
-              onMouseLeave={(e) => {
-                gsap.to(e.currentTarget, {
-                  background: 'rgba(34, 211, 238, 0.05)',
-                  duration: 0.3,
-                });
-              }}
-            >
-              <div
-                className="text-5xl font-bold mb-2"
-                style={{ color: 'var(--accent)' }}
-              >
-                {stat.number}
-              </div>
-              <div className="text-sm" style={{ color: 'var(--text-secondary)' }}>{stat.label}</div>
-            </div>
-          ))}
         </div>
       </div>
     </section>
