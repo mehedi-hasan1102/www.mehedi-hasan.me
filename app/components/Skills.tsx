@@ -1,335 +1,329 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import styles from './skills.module.css';
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import styles from "./skills.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
 interface Skill {
   name: string;
-  level: number; // 1-10
-  category: 'Frontend' | 'Backend' | 'Database' | 'Tools';
-  icon?: string;
-  color?: string;
-  featured?: boolean;
+  icon: string;
+  color: string;
 }
 
-const skills: Skill[] = [
-  // Frontend (React ecosystem)
-  { name: 'React', level: 9, category: 'Frontend', icon: '⚛️', color: '#61dafb', featured: true },
-  { name: 'Next.js', level: 9, category: 'Frontend', icon: '▲', color: '#ffffff', featured: true },
-  { name: 'TypeScript', level: 8, category: 'Frontend', icon: 'TS', color: '#3178c6' },
-  { name: 'Tailwind CSS', level: 9, category: 'Frontend', icon: '🎨', color: '#06b6d4' },
-  { name: 'GSAP', level: 10, category: 'Frontend', icon: '✨', color: '#88ce02', featured: true },
-  { name: 'Three.js', level: 7, category: 'Frontend', icon: '🎭', color: '#ffffff' },
-  
-  // Backend (Node.js ecosystem)
-  { name: 'Node.js', level: 9, category: 'Backend', icon: '🟢', color: '#68a063', featured: true },
-  { name: 'Express.js', level: 8, category: 'Backend', icon: '⚡', color: '#ffffff' },
-  { name: 'RESTful APIs', level: 9, category: 'Backend', icon: '🔗', color: '#ff6b6b' },
-  { name: 'JWT Auth', level: 8, category: 'Backend', icon: '🔐', color: '#ffd93d' },
-  
-  // Database
-  { name: 'MongoDB', level: 9, category: 'Database', icon: '🍃', color: '#13aa52', featured: true },
-  { name: 'Mongoose', level: 8, category: 'Database', icon: '🦁', color: '#880000' },
-  { name: 'Firebase', level: 7, category: 'Database', icon: '🔥', color: '#ffa726' },
-  { name: 'SQL Basics', level: 7, category: 'Database', icon: '🗄️', color: '#336791' },
-  
-  // Tools & Others
-  { name: 'Git & GitHub', level: 9, category: 'Tools', icon: '💻', color: '#f1502f', featured: true },
-  { name: 'WebGL', level: 7, category: 'Tools', icon: '📐', color: '#990000' },
-  { name: 'Performance', level: 8, category: 'Tools', icon: '⚙️', color: '#f59e0b' },
-  { name: 'Figma', level: 8, category: 'Tools', icon: '🎯', color: '#f24e1e' },
+interface SkillCategory {
+  title: string;
+  description: string;
+  skills: Skill[];
+}
+
+const skillCategories: SkillCategory[] = [
+  {
+    title: "FRONTEND",
+    description: "Building beautiful, responsive interfaces",
+    skills: [
+      { name: "React", icon: "⚛️", color: "#61DAFB" },
+      { name: "Next.js", icon: "▲", color: "#ffffff" },
+      { name: "TypeScript", icon: "TS", color: "#3178C6" },
+      { name: "JavaScript", icon: "JS", color: "#F7DF1E" },
+      { name: "Tailwind", icon: "🎨", color: "#06B6D4" },
+      { name: "GSAP", icon: "●", color: "#88CE02" },
+    ],
+  },
+  {
+    title: "BACKEND",
+    description: "Scalable server-side solutions",
+    skills: [
+      { name: "Node.js", icon: "⬢", color: "#339933" },
+      { name: "Express", icon: "Ex", color: "#ffffff" },
+      
+      { name: "REST API", icon: "{ }", color: "#06B6D4" },
+      { name: "GraphQL", icon: "◈", color: "#E10098" },
+      
+    ],
+  },
+  {
+    title: "DATABASE",
+    description: "Data storage & management",
+    skills: [
+      { name: "MongoDB", icon: "🍃", color: "#47A248" },
+      { name: "PostgreSQL", icon: "🐘", color: "#4169E1" },
+      { name: "MySQL", icon: "🐬", color: "#4479A1" },
+     
+      { name: "Firebase", icon: "🔥", color: "#FFCA28" },
+    ],
+  },
+  {
+    title: "TOOLS",
+    description: "Development & deployment",
+    skills: [
+      { name: "Git", icon: "⎇", color: "#F05032" },
+      
+      { name: "Linux", icon: "🐧", color: "#FCC624" },
+      { name: "Figma", icon: "◐", color: "#F24E1E" },
+      { name: "VS Code", icon: "◆", color: "#007ACC" },
+    ],
+  },
 ];
 
-const categories = ['Frontend', 'Backend', 'Database', 'Tools'] as const;
+const MagneticSkillTag = ({
+  skill,
+}: {
+  skill: Skill;
+}) => {
+  const tagRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!tagRef.current) return;
+    const rect = tagRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    gsap.to(tagRef.current, {
+      x: x * 0.4,
+      y: y * 0.4,
+      scale: 1.1,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
+
+  const handleMouseLeave = () => {
+    if (!tagRef.current) return;
+    gsap.to(tagRef.current, {
+      x: 0,
+      y: 0,
+      scale: 1,
+      duration: 0.5,
+      ease: "elastic.out(1, 0.3)",
+    });
+  };
+
+  return (
+    <div
+      ref={tagRef}
+      className={styles.magneticSkillTag}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ "--skill-color": skill.color } as React.CSSProperties}
+    >
+      <span className={styles.skillTagIcon}>{skill.icon}</span>
+      <span className={styles.skillTagName}>{skill.name}</span>
+    </div>
+  );
+};
+
+const BentoCard = ({
+  category,
+  index,
+  isLarge,
+}: {
+  category: SkillCategory;
+  index: number;
+  isLarge: boolean;
+}) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
+
+    gsap.set(card, { opacity: 0, y: 80, rotateX: -15 });
+
+    ScrollTrigger.create({
+      trigger: card,
+      start: "top 85%",
+      onEnter: () => {
+        gsap.to(card, {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          duration: 1,
+          delay: index * 0.15,
+          ease: "power3.out",
+        });
+      },
+    });
+  }, [index]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current || !glowRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    gsap.to(glowRef.current, {
+      x: x,
+      y: y,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      className={`${styles.bentoCard} ${isLarge ? styles.bentoCardLarge : ""}`}
+      onMouseMove={handleMouseMove}
+    >
+      <div ref={glowRef} className="bento-glow" />
+      <div className={styles.bentoContent}>
+        <div className={styles.bentoHeader}>
+          <span className={styles.bentoNumber}>{String(index + 1).padStart(2, "0")}</span>
+          <h3 className={styles.bentoTitle}>{category.title}</h3>
+        </div>
+        <p className={styles.bentoDescription}>{category.description}</p>
+        <div className={styles.bentoSkills}>
+          {category.skills.map((skill) => (
+            <MagneticSkillTag key={skill.name} skill={skill} />
+          ))}
+        </div>
+      </div>
+      <div className={styles.bentoBorder} />
+    </div>
+  );
+};
+
+const OrbitingSkill = ({ skill, index, total }: { skill: string; index: number; total: number }) => {
+  const skillRef = useRef<HTMLDivElement>(null);
+  const angle = (index / total) * 360;
+  const radius = 140;
+
+  useEffect(() => {
+    const el = skillRef.current;
+    if (!el) return;
+
+    // Set initial position
+    gsap.set(el, {
+      rotation: -angle,
+    });
+
+    // Continuous orbit animation
+    gsap.to(el.parentElement, {
+      rotation: "+=360",
+      duration: 40,
+      repeat: -1,
+      ease: "none",
+    });
+  }, [angle]);
+
+  return (
+    <div
+      ref={skillRef}
+      className={styles.orbitingSkill}
+      style={{
+        transform: `rotate(${angle}deg) translateX(${radius}px) rotate(-${angle}deg)`,
+      }}
+    >
+      <span>{skill}</span>
+    </div>
+  );
+};
+
+const orbitSkills = ["CREATIVE", "INNOVATIVE", "DEDICATED", "CURIOUS", "ADAPTABLE", "FOCUSED"];
 
 export default function Skills() {
   const sectionRef = useRef<HTMLElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const orbitContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Animate skill items on scroll
-      const items = gsap.utils.toArray('[data-skill]') as Element[];
+    const header = headerRef.current;
+    const orbitContainer = orbitContainerRef.current;
 
-      items.forEach((item, index) => {
-        const isFeatured = (item as HTMLElement).hasAttribute('data-featured');
-        
-        gsap.from(item, {
-          scrollTrigger: {
-            trigger: item,
-            start: 'top 85%',
-            end: 'top 65%',
-            scrub: 0.5,
-          },
-          opacity: 0,
-          scale: 0.6,
-          y: 50,
-          rotationX: 20,
-          duration: 0.8,
+    if (!header) return;
+
+    gsap.set(header.children, { y: 80, opacity: 0 });
+
+    ScrollTrigger.create({
+      trigger: header,
+      start: "top 80%",
+      onEnter: () => {
+        gsap.to(header.children, {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.15,
+          ease: "power3.out",
         });
-      });
+      },
+    });
 
-      // Floating animation for decorative elements
-      const floaters = gsap.utils.toArray('[data-float]') as Element[];
-      floaters.forEach((floater, index) => {
-        gsap.to(floater, {
-          y: -30,
-          duration: 4 + index * 0.5,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut',
-        });
+    // Orbit animation
+    if (orbitContainer) {
+      gsap.to(orbitContainer, {
+        rotation: 360,
+        duration: 60,
+        repeat: -1,
+        ease: "none",
       });
+    }
 
-      // Stagger animation for category reveals
-      gsap.to('[data-category-item]', {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 75%',
-        },
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.1,
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [activeCategory]);
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
 
   return (
-    <section
-      id="skills"
-      ref={sectionRef}
-      className="relative overflow-hidden py-20 md:py-32"
-      style={{ background: 'var(--bg)' }}
-    >
-      {/* Animated gradient background elements */}
-      <div 
-        className="absolute -top-1/3 -right-1/3 w-full h-full rounded-full opacity-20 pointer-events-none"
-        data-float
-        style={{
-          background: 'radial-gradient(circle, var(--accent) 0%, transparent 70%)',
-          filter: 'blur(120px)',
-        }}
-      />
-      <div 
-        className="absolute -bottom-1/3 -left-1/3 w-full h-full rounded-full opacity-20 pointer-events-none"
-        data-float
-        style={{
-          background: 'radial-gradient(circle, #7c3aed 0%, transparent 70%)',
-          filter: 'blur(120px)',
-        }}
-      />
+    <section ref={sectionRef} className={styles.skillsSection} id="skills">
+      {/* Gradient Orbs Background */}
+      <div className={`${styles.skillsOrb} ${styles.skillsOrb1}`} />
+      <div className={`${styles.skillsOrb} ${styles.skillsOrb2}`} />
+      <div className={`${styles.skillsOrb} ${styles.skillsOrb3}`} />
 
-      <div className="container relative z-10 mx-auto px-4 md:px-6">
+      <div className={styles.skillsContainer}>
         {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16 md:mb-24">
-          <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full" style={{
-            background: 'rgba(34, 211, 238, 0.1)',
-            border: '1px solid rgba(34, 211, 238, 0.2)',
-          }}>
-            <span className="text-lg">🛠️</span>
-            <span className="text-sm font-semibold" style={{ color: 'var(--accent)' }}>
-              FULL-STACK MERN DEVELOPER
-            </span>
-          </div>
-
-          <h2 
-            className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
-            style={{
-              color: 'var(--text)',
-              backgroundImage: 'linear-gradient(135deg, var(--text) 0%, var(--accent) 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            Technical Arsenal
+        <div ref={headerRef} className={styles.skillsHeader}>
+          <span className={styles.skillsLabel}>WHAT I WORK WITH</span>
+          <h2 className={styles.skillsTitle}>
+            MY <span className="text-accent">TOOLKIT</span>
           </h2>
-
-          <p 
-            className="text-base md:text-lg leading-relaxed"
-            style={{ color: 'var(--text-secondary)' }}
-          >
-            Master of modern web technologies. Building scalable applications with beautiful interactions.
-          </p>
-
-          <div className="w-16 h-1.5 rounded-full mx-auto mt-6" style={{
-            background: 'linear-gradient(90deg, var(--accent), #7c3aed)',
-          }} />
         </div>
 
-        {/* All Skills in Masonry Grid */}
-        <div ref={containerRef} className="relative">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 auto-rows-max">
-            {skills.map((skill, index) => {
-              const isVisible = activeCategory === null || activeCategory === skill.category;
-              
-              return (
-                <div
-                  key={skill.name}
-                  data-skill
-                  data-category-item
-                  data-featured={skill.featured}
-                  className={`group relative overflow-hidden rounded-xl transition-all duration-300 cursor-pointer hover:scale-105 ${
-                    skill.featured ? 'sm:col-span-2 lg:col-span-2 lg:row-span-2' : ''
-                  }`}
-                  style={{
-                    opacity: isVisible ? 1 : 0.5,
-                    pointerEvents: isVisible ? 'auto' : 'none',
-                    background: `linear-gradient(135deg, rgba(34, 211, 238, ${skill.featured ? '0.15' : '0.08'}), rgba(${
-                      skill.color === '#61dafb' ? '97, 218, 251' :
-                      skill.color === '#88ce02' ? '136, 206, 2' :
-                      skill.color === '#68a063' ? '104, 160, 99' :
-                      skill.color === '#13aa52' ? '19, 170, 82' :
-                      skill.color === '#f1502f' ? '241, 80, 47' :
-                      '34, 211, 238'
-                    }, ${skill.featured ? '0.08' : '0.03'}))`,
-                    border: `1px solid rgba(34, 211, 238, ${skill.featured ? '0.3' : '0.1'})`,
-                    padding: skill.featured ? '2rem' : '1.5rem',
-                    minHeight: skill.featured ? '280px' : '200px',
-                  }}
-                  onMouseEnter={(e) => {
-                    gsap.to(e.currentTarget, {
-                      background: `linear-gradient(135deg, rgba(34, 211, 238, ${skill.featured ? '0.25' : '0.15'}), rgba(${
-                        skill.color === '#61dafb' ? '97, 218, 251' :
-                        skill.color === '#88ce02' ? '136, 206, 2' :
-                        skill.color === '#68a063' ? '104, 160, 99' :
-                        skill.color === '#13aa52' ? '19, 170, 82' :
-                        skill.color === '#f1502f' ? '241, 80, 47' :
-                        '34, 211, 238'
-                      }, ${skill.featured ? '0.12' : '0.08'}))`,
-                      borderColor: `rgba(34, 211, 238, ${skill.featured ? '0.5' : '0.3'})`,
-                      boxShadow: `0 20px 40px rgba(34, 211, 238, ${skill.featured ? '0.2' : '0.1'})`,
-                      duration: 0.3,
-                    });
-                    gsap.to(e.currentTarget.querySelector('[data-glow]'), {
-                      opacity: 1,
-                      duration: 0.3,
-                    });
-                  }}
-                  onMouseLeave={(e) => {
-                    gsap.to(e.currentTarget, {
-                      background: `linear-gradient(135deg, rgba(34, 211, 238, ${skill.featured ? '0.15' : '0.08'}), rgba(${
-                        skill.color === '#61dafb' ? '97, 218, 251' :
-                        skill.color === '#88ce02' ? '136, 206, 2' :
-                        skill.color === '#68a063' ? '104, 160, 99' :
-                        skill.color === '#13aa52' ? '19, 170, 82' :
-                        skill.color === '#f1502f' ? '241, 80, 47' :
-                        '34, 211, 238'
-                      }, ${skill.featured ? '0.08' : '0.03'}))`,
-                      borderColor: `rgba(34, 211, 238, ${skill.featured ? '0.3' : '0.1'})`,
-                      boxShadow: '0 0 0 rgba(34, 211, 238, 0)',
-                      duration: 0.3,
-                    });
-                    gsap.to(e.currentTarget.querySelector('[data-glow]'), {
-                      opacity: 0,
-                      duration: 0.3,
-                    });
-                  }}
-                >
-                  {/* Glow effect on hover */}
-                  <div
-                    data-glow
-                    className="absolute inset-0 opacity-0 transition-opacity"
-                    style={{
-                      background: `radial-gradient(circle at center, ${skill.color || 'var(--accent)'} 0%, transparent 70%)`,
-                      filter: 'blur(40px)',
-                    }}
+        {/* Bento Grid */}
+        <div className={styles.bentoGrid}>
+          {skillCategories.map((category, index) => (
+            <BentoCard
+              key={category.title}
+              category={category}
+              index={index}
+              isLarge={index === 0 || index === 3}
+            />
+          ))}
+
+          {/* Center Orbit Card */}
+          <div className={styles.bentoOrbitCard}>
+            <div className={styles.orbitWrapper}>
+              <div ref={orbitContainerRef} className={styles.orbitContainer}>
+                {orbitSkills.map((skill, index) => (
+                  <OrbitingSkill
+                    key={skill}
+                    skill={skill}
+                    index={index}
+                    total={orbitSkills.length}
                   />
-
-                  {/* Featured badge */}
-                  {skill.featured && (
-                    <div 
-                      className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold"
-                      style={{
-                        background: 'rgba(34, 211, 238, 0.2)',
-                        color: 'var(--accent)',
-                        border: '1px solid rgba(34, 211, 238, 0.3)',
-                      }}
-                    >
-                      🌟 Expert
-                    </div>
-                  )}
-
-                  {/* Content */}
-                  <div className="relative z-10 h-full flex flex-col justify-between">
-                    <div>
-                      <span className={skill.featured ? 'text-6xl' : 'text-4xl'}>
-                        {skill.icon}
-                      </span>
-                      <h4
-                        className={`font-bold mt-3 ${skill.featured ? 'text-2xl' : 'text-lg'}`}
-                        style={{ color: 'var(--text)' }}
-                      >
-                        {skill.name}
-                      </h4>
-                    </div>
-
-                    <div className="flex items-center justify-between mt-4">
-                      <span 
-                        className="text-xs md:text-sm font-semibold uppercase tracking-wider"
-                        style={{ color: 'var(--accent)' }}
-                      >
-                        {skill.category}
-                      </span>
-                      <div 
-                        className="w-8 h-8 rounded-full flex items-center justify-center"
-                        style={{
-                          background: `linear-gradient(135deg, ${skill.color || 'var(--accent)'}, rgba(34, 211, 238, 0.5))`,
-                          fontSize: '0.75rem',
-                          fontWeight: 'bold',
-                          color: skill.color === '#ffffff' ? 'black' : 'white',
-                        }}
-                      >
-                        →
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+                ))}
+              </div>
+              <div className={styles.orbitCenter}>
+                <span className={styles.orbitText}>SOFT</span>
+                <span className={styles.orbitTextAccent}>SKILLS</span>
+              </div>
+              <div className={styles.orbitRing} />
+              <div className={`${styles.orbitRing} ${styles.orbitRing2}`} />
+            </div>
           </div>
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-16 md:mt-24 text-center">
-          <p 
-            className="text-sm md:text-base mb-6"
-            style={{ color: 'var(--text-secondary)' }}
-          >
-            Ready to collaborate on your next project?
+        {/* Bottom Tagline */}
+        <div className={styles.skillsTagline}>
+          <span className={styles.taglineLine} />
+          <p className={styles.taglineText}>
+            ALWAYS LEARNING • ALWAYS GROWING • ALWAYS BUILDING
           </p>
-          <a
-            href="#contact"
-            className="inline-block px-8 py-3 rounded-lg font-semibold transition-all duration-300"
-            style={{
-              background: 'linear-gradient(135deg, var(--accent), #7c3aed)',
-              color: 'white',
-              border: 'none',
-            }}
-            onMouseEnter={(e) => {
-              gsap.to(e.currentTarget, {
-                scale: 1.08,
-                boxShadow: '0 15px 35px rgba(34, 211, 238, 0.4)',
-                duration: 0.3,
-              });
-            }}
-            onMouseLeave={(e) => {
-              gsap.to(e.currentTarget, {
-                scale: 1,
-                boxShadow: '0 0 0 rgba(34, 211, 238, 0)',
-                duration: 0.3,
-              });
-            }}
-          >
-            Let's Build Something 🚀
-          </a>
+          <span className={styles.taglineLine} />
         </div>
       </div>
     </section>
