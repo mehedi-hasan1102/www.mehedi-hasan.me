@@ -52,29 +52,66 @@ export default function Works() {
     const ctx = gsap.context(() => {
       const cards = gsap.utils.toArray('.work-card') as Element[];
 
-      cards.forEach((card, index) => {
-        gsap.fromTo(card, 
-          {
-            opacity: 0,
-            y: 60,
-            x: index % 2 === 0 ? -40 : 40,
-            rotationY: index % 2 === 0 ? 10 : -10,
+      // Header animation
+      const header = sectionRef.current?.querySelector(`.${styles.worksHeader}`);
+      if (header) {
+        gsap.set(header.children, { y: 60, opacity: 0 });
+        ScrollTrigger.create({
+          trigger: header,
+          start: 'top 85%',
+          onEnter: () => {
+            gsap.to(header.children, {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              stagger: 0.15,
+              ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+            });
           },
-          {
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 90%',
-              end: 'top 70%',
-              scrub: 0.5,
-              onEnter: () => gsap.to(card, { opacity: 1, y: 0, x: 0, rotationY: 0, duration: 0.8 }),
-            },
-            opacity: 1,
-            y: 0,
-            x: 0,
-            rotationY: 0,
-            duration: 0.8,
-          }
-        );
+        });
+      }
+
+      // Card animations - similar to skills section
+      cards.forEach((card, index) => {
+        const imageDiv = card.querySelector('[data-work-image]');
+        const contentDiv = card.querySelector(`.${styles.workContent}`);
+
+        // Initial states
+        gsap.set(card, {
+          opacity: 0,
+          y: 100,
+          scale: 0.85,
+          rotateX: -20,
+        });
+        gsap.set(contentDiv, { opacity: 0 });
+        gsap.set(imageDiv, { scale: 1 });
+
+        // Scroll trigger animation
+        ScrollTrigger.create({
+          trigger: card,
+          start: 'top 80%',
+          onEnter: () => {
+            const tl = gsap.timeline();
+
+            // Card entrance with 3D rotation
+            tl.to(card, {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              rotateX: 0,
+              duration: 0.9,
+              delay: index * 0.12,
+              ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+            }, 0);
+
+            // Content fade
+            tl.to(contentDiv, {
+              opacity: 1,
+              duration: 0.6,
+              ease: 'power2.out',
+            }, 0.2);
+          },
+        });
       });
     }, sectionRef);
 
@@ -85,22 +122,30 @@ export default function Works() {
     setHoveredId(isHovering ? id : null);
     const card = document.querySelector(`[data-work-id="${id}"]`);
     if (card) {
-      gsap.to(card, {
-        y: isHovering ? -16 : 0,
-        rotationZ: isHovering ? 2 : 0,
-        scale: isHovering ? 1.02 : 1,
+      const tl = gsap.timeline();
+
+      tl.to(card, {
+        y: isHovering ? -10 : 0,
+        scale: isHovering ? 1.04 : 1,
         boxShadow: isHovering
-          ? '0 30px 60px rgba(34, 211, 238, 0.25)'
+          ? '0 30px 60px rgba(6, 182, 212, 0.35)'
           : '0 10px 30px rgba(0, 0, 0, 0.2)',
         duration: 0.4,
-        ease: 'power3.out',
-      });
+        ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+      }, 0);
+
+      // Animate border glow
+      tl.to(card, {
+        borderColor: isHovering ? 'rgba(6, 182, 212, 0.5)' : 'rgba(34, 211, 238, 0.1)',
+        duration: 0.4,
+        ease: 'power2.out',
+      }, 0);
 
       // Animate image overlay
       const image = card.querySelector('[data-work-image]');
       if (image) {
         gsap.to(image, {
-          scale: isHovering ? 1.1 : 1,
+          scale: isHovering ? 1.15 : 1,
           duration: 0.6,
           ease: 'power2.out',
         });
