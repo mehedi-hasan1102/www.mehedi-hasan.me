@@ -514,9 +514,20 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Controls - Right Side (Hamburger + Theme) */}
-          <div className="lg:hidden ">
-           
-           
+          <div className="lg:hidden flex items-center gap-2">
+            {/* Book a Call Icon Button - Mobile Only */}
+            <button
+              onClick={() => setIsBookingModalOpen(true)}
+              className="p-2 rounded-full"
+              style={{
+                background: 'rgba(6, 182, 212, 0.2)',
+                color: 'var(--accent)',
+                transition: 'all 0.3s ease',
+              }}
+              aria-label="Book a call"
+            >
+              <FiCalendar size={20} />
+            </button>
 
             {/* Mobile Menu Button - Hamburger */}
             <button
