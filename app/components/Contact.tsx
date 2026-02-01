@@ -83,10 +83,10 @@ export default function Contact() {
 
         {/* Email */}
         <a
-          href="mailto:mehedi.hasani1o23@gmail.com"
+          href="mailto:mehedi.hasan11023@gmail.com"
           className={styles.emailDisplay}
         >
-          mehedi.hasani1o23@gmail.com
+          mehedi.hasan11023@gmail.com
         </a>
 
         {/* Content Grid */}
