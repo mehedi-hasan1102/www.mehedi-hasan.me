@@ -1,0 +1,137 @@
+/* Skills Component Styles */
+
+.skills {
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+@media (max-width: 768px) {
+  .skills {
+    padding: 4rem 0;
+  }
+}
+
+.skillsDecorative1 {
+  position: absolute;
+  top: -10rem;
+  right: -10rem;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 9999px;
+  opacity: 0.1;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  filter: blur(60px);
+}
+
+.skillsDecorative2 {
+  position: absolute;
+  bottom: -10rem;
+  left: -10rem;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 9999px;
+  opacity: 0.1;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  filter: blur(60px);
+}
+
+.skillsContent {
+  position: relative;
+  z-10;
+}
+
+.skillsHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.skillsTitle {
+  color: var(--text);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+.skillsDescription {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .skillsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+}
+
+.skillItem {
+  padding: 2rem;
+  border-radius: 0.75rem;
+  background: rgba(34, 211, 238, 0.05);
+  border: 1px solid rgba(34, 211, 238, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.skillItem:hover {
+  background: rgba(34, 211, 238, 0.1);
+  border-color: rgba(34, 211, 238, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(34, 211, 238, 0.15);
+}
+
+.skillName {
+  color: var(--text);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+}
+
+.skillLevel {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.skillLevelBar {
+  flex: 1;
+  height: 0.5rem;
+  background: rgba(34, 211, 238, 0.2);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.skillLevelFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), rgba(34, 211, 238, 0.7));
+  border-radius: 9999px;
+  transition: width 0.6s ease;
+}
+
+.skillLevelNumber {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.875rem;
+  min-width: 2rem;
+  text-align: right;
+}
+
+.skillCategory {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.5rem;
+  opacity: 0.7;
+}

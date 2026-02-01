@@ -1,0 +1,181 @@
+/* Works Component Styles */
+
+.works {
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+@media (max-width: 768px) {
+  .works {
+    padding: 4rem 0;
+  }
+}
+
+.worksDecorative1 {
+  position: absolute;
+  top: -10rem;
+  left: -10rem;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 9999px;
+  opacity: 0.1;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  filter: blur(60px);
+}
+
+.worksDecorative2 {
+  position: absolute;
+  bottom: -10rem;
+  right: -10rem;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 9999px;
+  opacity: 0.1;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  filter: blur(60px);
+}
+
+.worksContent {
+  position: relative;
+  z-10;
+}
+
+.worksHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.worksTitle {
+  color: var(--text);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+.worksTitleSpan {
+  color: var(--accent);
+}
+
+.worksDescription {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.worksGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+@media (max-width: 768px) {
+  .worksGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.workCard {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: rgba(34, 211, 238, 0.05);
+  border: 1px solid rgba(34, 211, 238, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.workCard:hover {
+  border-color: rgba(34, 211, 238, 0.3);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(34, 211, 238, 0.2);
+}
+
+.workImage {
+  height: 12rem;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.3) 0%, rgba(34, 211, 238, 0.1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.workImageGradient {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.workCard:hover .workImageGradient {
+  opacity: 1;
+}
+
+.workImageText {
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.1);
+  font-size: 4rem;
+  letter-spacing: -0.02em;
+}
+
+.workContent {
+  padding: 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.workCategory {
+  font-size: 0.75rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.workTitle {
+  color: var(--text);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.workDescription {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.workTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.workTag {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.25rem;
+  background: rgba(34, 211, 238, 0.1);
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid rgba(34, 211, 238, 0.2);
+}
+
+.workCard:hover .workTag {
+  background: rgba(34, 211, 238, 0.2);
+  border-color: rgba(34, 211, 238, 0.4);
+}

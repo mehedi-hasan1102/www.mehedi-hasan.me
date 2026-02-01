@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import SplitType from 'split-type';
 import { FiArrowRight } from 'react-icons/fi';
+import styles from './contact.module.css';
 
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null);

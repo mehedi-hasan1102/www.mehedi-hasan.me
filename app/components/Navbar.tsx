@@ -6,6 +6,7 @@ import Image from 'next/image';
 import gsap from 'gsap';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { FaMoon, FaSun } from 'react-icons/fa';
+import styles from './navbar.module.css';
 
 // Navigation links
 const NAV_LINKS = [

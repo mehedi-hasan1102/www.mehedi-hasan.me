@@ -1,0 +1,156 @@
+/* Process Component Styles */
+
+.process {
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+@media (max-width: 768px) {
+  .process {
+    padding: 4rem 0;
+  }
+}
+
+.processDecorative1 {
+  position: absolute;
+  top: -10rem;
+  right: -10rem;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 9999px;
+  opacity: 0.1;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  filter: blur(60px);
+}
+
+.processDecorative2 {
+  position: absolute;
+  bottom: -10rem;
+  left: -10rem;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 9999px;
+  opacity: 0.1;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  filter: blur(60px);
+}
+
+.processContent {
+  position: relative;
+  z-10;
+}
+
+.processHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.processTitle {
+  color: var(--text);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+.processDescription {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.processTimeline {
+  position: relative;
+  display: grid;
+  gap: 4rem;
+  margin-top: 4rem;
+}
+
+@media (max-width: 768px) {
+  .processTimeline {
+    gap: 2rem;
+  }
+}
+
+.processTimelineConnector {
+  position: absolute;
+  left: 2rem;
+  top: 5rem;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent) 0%, transparent 100%);
+}
+
+@media (max-width: 768px) {
+  .processTimelineConnector {
+    left: 0.75rem;
+  }
+}
+
+.processStep {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+  .processStep {
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+  }
+}
+
+.processStepDot {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bg);
+  font-weight: 700;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .processStepDot {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+}
+
+.processStepContent {
+  padding: 2rem;
+  border-radius: 0.75rem;
+  background: rgba(34, 211, 238, 0.05);
+  border: 1px solid rgba(34, 211, 238, 0.1);
+  transition: all 0.3s ease;
+}
+
+.processStepContent:hover {
+  background: rgba(34, 211, 238, 0.1);
+  border-color: rgba(34, 211, 238, 0.3);
+  transform: translateX(8px);
+}
+
+.processStepTitle {
+  color: var(--text);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.processStepDescription {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
