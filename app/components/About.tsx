@@ -161,20 +161,53 @@ export default function About() {
             >
               <h2 className={styles.aboutHeading}>About <span style={{ color: 'var(--accent)' }}>Me</span></h2>
             </div>
+            <div
+              ref={(el) => {
+                if (el) paragraphsRef.current[0] = el;
+              }}
+              className="text-lg leading-relaxed"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              <p>
+                I am a{' '}
+                <span 
+                  style={{ 
+                    background: 'var(--accent)',
+                    color: 'var(--bg)',
+                    padding: '0.2rem 0.6rem',
+                    borderRadius: '0.25rem',
+                    fontWeight: '600',
+                  }}
+                >
+                  MERN Stack Developer
+                </span>
+                {' '}from{' '}
+                <span 
+                  style={{ 
+                    background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                    color: 'white',
+                    padding: '0.2rem 0.6rem',
+                    borderRadius: '0.25rem',
+                    fontWeight: '600',
+                  }}
+                >
+                  Bangladesh
+                </span>
+                {' '}with 2 years of programming experience, building personal and practice-based web applications using modern JavaScript technologies
+              </p>
+            </div>
             {[
-              "I am a MERN Stack Developer from Bangladesh with 2 years of programming experience, building personal and practice-based web applications using modern JavaScript technologies",
               "I focus on clean code, performance, and modern web technologies across the full stack.",
               "I also write technical blogs and speak at developer meetups, continuously learning and growing as a developer.",
             ].map((text, index) => (
               <div
-                key={index}
+                key={index + 1}
                 ref={(el) => {
-                  if (el) paragraphsRef.current[index] = el;
+                  if (el) paragraphsRef.current[index + 1] = el;
                 }}
                 className="text-lg leading-relaxed"
                 style={{ color: 'var(--text-secondary)' }}
               >
-               
                 <p>{text}</p>
               </div>
             ))}
