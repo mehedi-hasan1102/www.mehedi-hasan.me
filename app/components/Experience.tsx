@@ -59,6 +59,24 @@ export default function Experience() {
   const timelineRef = useRef<HTMLDivElement>(null);
   const progressFillRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const glowRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
+    const card = e.currentTarget;
+    const glow = glowRefs.current[index];
+    if (!card || !glow) return;
+
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    gsap.to(glow, {
+      x: x,
+      y: y,
+      duration: 0.3,
+      ease: 'power2.out',
+    });
+  };
 
   useEffect(() => {
     // Animate header
@@ -191,7 +209,16 @@ export default function Experience() {
 
               {/* Timeline Content */}
               <div className={styles.timelineContent}>
-                <div className={styles.timelineCard}>
+                <div 
+                  className={styles.timelineCard}
+                  onMouseMove={(e) => handleMouseMove(e, index)}
+                >
+                  <div 
+                    ref={(el) => {
+                      glowRefs.current[index] = el;
+                    }} 
+                    className={styles.cardGlow} 
+                  />
                   {/* Card Header */}
                   <div className={styles.cardHeader}>
                     <span className={`${styles.cardType} ${exp.type === 'education' ? styles.education : ''}`}>
