@@ -387,14 +387,6 @@ export default function Skills() {
           </div>
         </div>
 
-        {/* Bottom Tagline */}
-        <div className={styles.skillsTagline}>
-          <span className={styles.taglineLine} />
-          <p className={styles.taglineText}>
-            ALWAYS LEARNING • ALWAYS GROWING • ALWAYS BUILDING
-          </p>
-          <span className={styles.taglineLine} />
-        </div>
       </div>
     </section>
   );
