@@ -5,6 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Link from 'next/link';
+import { FiExternalLink } from 'react-icons/fi';
 import '@/app/components/skills.module.css';
 import styles from './projectDetails.module.css';
 
@@ -177,7 +178,7 @@ export default function ProjectDetails() {
           {/* Breadcrumb */}
           <div className={styles.breadcrumb} data-hero-animate>
             <button onClick={() => router.back()} className={styles.backButton}>
-              ← BACK
+              <span>← BACK</span>
             </button>
             <span style={{ color: 'var(--text-secondary)' }}>/</span>
             <span className={styles.categoryBadge}>{project.category}</span>
@@ -219,6 +220,32 @@ export default function ProjectDetails() {
                   View Site
                 </a>
               </div>
+              {project.frontendUrl && (
+                <div className={styles.metaRow}>
+                  <span className={styles.metaLabel}>Source Code →</span>
+                  <a 
+                    href={project.frontendUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={styles.metaLink}
+                  >
+                    Frontend Code
+                  </a>
+                </div>
+              )}
+              {project.backendUrl && (
+                <div className={styles.metaRow}>
+                  <span className={styles.metaLabel}>Source Code →</span>
+                  <a 
+                    href={project.backendUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={styles.metaLink}
+                  >
+                    Backend Code
+                  </a>
+                </div>
+              )}
               <div className={styles.metaRow}>
                 <span className={styles.metaLabel}>Role</span>
                 <span className={styles.metaValue}>FULL-STACK DEV</span>
@@ -229,7 +256,7 @@ export default function ProjectDetails() {
       </section>
 
       {/* Main Project Image */}
-      <section className={styles.mainImageSection} data-reveal-section>
+      {/* <section className={styles.mainImageSection} data-reveal-section>
         <div className={styles.imageContainer}>
           <img
             src={project.image}
@@ -238,7 +265,7 @@ export default function ProjectDetails() {
             data-parallax-image
           />
         </div>
-      </section>
+      </section> */}
 
       {/* Project Gallery Grid */}
       <section className={styles.gallerySection} data-reveal-section>
@@ -301,7 +328,7 @@ export default function ProjectDetails() {
       </section>
 
       {/* Additional Project Image */}
-      <section className={styles.additionalImageSection} data-reveal-section>
+      {/* <section className={styles.additionalImageSection} data-reveal-section>
         <div className={styles.imageContainer}>
           <img
             src={project.image}
@@ -309,7 +336,7 @@ export default function ProjectDetails() {
             className={styles.showcaseImage}
           />
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Buttons Section */}
       <section className={styles.ctaButtonsSection} data-reveal-section>
@@ -320,18 +347,9 @@ export default function ProjectDetails() {
             rel="noopener noreferrer"
             className={styles.ctaButton}
           >
-            VISIT LIVE SITE →
+            <span>VISIT LIVE SITE</span>
+            <FiExternalLink size={20} />
           </a>
-          {project.frontendUrl && (
-            <a
-              href={project.frontendUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.ctaButtonSecondary}
-            >
-              VIEW CODE
-            </a>
-          )}
         </div>
       </section>
     </div>
