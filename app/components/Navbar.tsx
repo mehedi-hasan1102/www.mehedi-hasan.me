@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import gsap from 'gsap';
 import { FiMenu, FiX, FiCalendar } from 'react-icons/fi';
 import { FaMoon, FaSun } from 'react-icons/fa';
@@ -28,6 +29,7 @@ const MORE_ITEMS = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -308,27 +310,37 @@ export default function Navbar() {
             backdropFilter: 'blur(10px)',
             border: '1px solid rgba(34, 211, 238, 0.15)',
           }}>
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onMouseEnter={handleLinkHover}
-                onMouseLeave={handleLinkHoverEnd}
-                className={styles.navLink}
-              >
-                {link.label}
-                {/* Underline that grows from left */}
-                <span
-                  data-underline
-                  className="absolute bottom-0 left-0 w-full h-0.5 origin-left"
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onMouseEnter={handleLinkHover}
+                  onMouseLeave={handleLinkHoverEnd}
+                  className={styles.navLink}
                   style={{
-                    background: 'var(--accent)',
-                    transform: 'scaleX(0)',
-                    transition: 'transform 0.4s ease',
+                    color: isActive ? 'var(--accent)' : 'var(--text)',
                   }}
-                />
-              </Link>
-            ))}
+                >
+                  {link.label}
+                  {/* Active indicator dot */}
+                  {isActive && (
+                    <span
+                      className="absolute -bottom-2 left-1/2"
+                      style={{
+                        width: '4px',
+                        height: '4px',
+                        borderRadius: '50%',
+                        background: 'var(--accent)',
+                        transform: 'translateX(-50%)',
+                        boxShadow: '0 0 8px var(--accent)',
+                      }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
 
             {/* More Dropdown */}
 <div
@@ -567,24 +579,39 @@ export default function Navbar() {
          
           {/* Navigation Items with Numbers */}
           <div className="flex-1 space-y-3 mt-12">
-            {NAV_LINKS.map((link, idx) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="flex items-baseline gap-6 group cursor-pointer transition-all"
-                style={{
-                  color: 'var(--bg)',
-                }}
-                onClick={() => setIsOpen(false)}
-              >
-                <span className="text-3xl font-black opacity-40 group-hover:opacity-100 transition-opacity">
-                  {String(idx + 1).padStart(2, '0')}
-                </span>
-                <span className="text-3xl font-bold group-hover:scale-105 transition-transform origin-left">
-                  {link.label}
-                </span>
-              </Link>
-            ))}
+            {NAV_LINKS.map((link, idx) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="flex items-baseline gap-6 group cursor-pointer transition-all relative"
+                  style={{
+                    color: 'var(--bg)',
+                  }}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <span className="text-3xl font-black opacity-40 group-hover:opacity-100 transition-opacity">
+                    {String(idx + 1).padStart(2, '0')}
+                  </span>
+                  <span className="text-3xl font-bold group-hover:scale-105 transition-transform origin-left flex items-center gap-3">
+                    {link.label}
+                    {isActive && (
+                      <span
+                        className="inline-block"
+                        style={{
+                          width: '8px',
+                          height: '8px',
+                          borderRadius: '50%',
+                          background: 'var(--bg)',
+                          boxShadow: '0 0 12px var(--bg)',
+                        }}
+                      />
+                    )}
+                  </span>
+                </Link>
+              );
+            })}
             
             {/* More Item */}
             <button
