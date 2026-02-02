@@ -77,17 +77,18 @@ export default function About() {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Left side - Profile Image */}
           <div className="flex justify-center md:justify-start">
-            <div className="relative w-80 h-96 rounded-2xl overflow-hidden shadow-2xl" style={{
-              border: '2px solid var(--accent)',
-              boxShadow: '0 0 40px rgba(34, 211, 238, 0.2)',
-            }}>
-              <Image
-                src="/profile/profile - blue.png"
-                alt="Profile"
-                fill
-                className="object-cover"
-                priority
-              />
+            <div className="relative w-80 h-96">
+              <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/profile/profile - blue.png"
+                  alt="Profile"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              {/* Animated border element */}
+              <div className={styles.profileImageBorder} />
             </div>
           </div>
 
