@@ -13,17 +13,17 @@ import styles from './navbar.module.css';
 // Navigation links
 const NAV_LINKS = [
   { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Work', href: '/work' },
+  // { label: 'About', href: '/about' },
+  // { label: 'Work', href: '/work' },
   { label: 'Blog', href: '/blog' },
 ];
 
 // Dropdown menu items
 const MORE_ITEMS = [
   { label: 'Dashboard', href: '/dashboard' },
-  { label: 'Spotify', href: '/spotify' },
-  { label: 'Feedback', href: '/feedback' },
-  { label: 'Snippets', href: '/snippets' },
+  // { label: 'Spotify', href: '/spotify' },
+  // { label: 'Feedback', href: '/feedback' },
+  // { label: 'Snippets', href: '/snippets' },
   { label: 'Social corner', href: '/social-corner' },
   { label: 'Light Mode', isThemeToggle: true },
 ];
