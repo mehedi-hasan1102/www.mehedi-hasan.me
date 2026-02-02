@@ -1,254 +1,202 @@
 [
   {
     "id": 1,
-    "slug": "digital-canvas",
-    "title": "Digital Canvas",
-    "category": "Web Design",
-    "shortDescription": "Interactive art gallery with GSAP animations and smooth scrolling",
-    "fullDescription": "A cutting-edge interactive art gallery platform that showcases the power of modern web animations. Built with React and GSAP, this project features seamless scroll-triggered animations, parallax effects, and advanced ScrollTrigger implementations.",
-    "image": "from-cyan-400 to-blue-500",
-    "color": "#06b6d4",
-    "tags": ["GSAP", "ScrollTrigger", "React"],
-    "technologies": {
-      "frontend": ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-      "animation": ["GSAP", "ScrollTrigger"],
-      "tools": ["Figma", "Git"]
-    },
-    "features": [
-      "Real-time scroll animations with GSAP ScrollTrigger",
-      "Parallax effects and smooth transitions",
-      "Responsive design with mobile optimization",
-      "Performance-optimized animations",
-      "Interactive hover states with advanced animations"
-    ],
+    "slug": "plant-care",
+    "title": "Plant Care",
+    "category": "FULL-STACK",
+    "description": "Helps users manage and track plant care routines with reminders and notes.",
+    "image": "/assets/images/projects/plantsc.png",
+    "tech": ["React", "MongoDB", "Firebase", "Node.js"],
+    "liveUrl": "https://plant-care-tracker-bd.web.app",
+    "frontendUrl": "https://github.com/mehedi-hasan1102/Plant-Care-Client",
+    "backendUrl": "https://github.com/mehedi-hasan1102/Plant-Care-Server",
+    "year": "2025",
     "challenges": [
-      "Implementing smooth parallax effects across different screen sizes",
-      "Optimizing animation performance for 60fps",
-      "Creating seamless scroll-driven animations",
-      "Mobile-first responsive design"
+      "Managing complex plant care schedules across different species",
+      "Implementing reliable notification system",
+      "Synchronizing data in real-time across devices",
+      "Creating intuitive UI for plant information"
     ],
-    "solutions": [
-      "Used GSAP's ScrollTrigger for efficient scroll-driven animations",
-      "Implemented requestAnimationFrame for smooth 60fps performance",
-      "Mobile-optimized animations with adaptive timings",
-      "Performance profiling and optimization"
-    ],
-    "liveUrl": "https://example.com/digital-canvas",
-    "githubUrl": "https://github.com/example/digital-canvas",
-    "images": [
-      "/projects/digital-canvas-1.jpg",
-      "/projects/digital-canvas-2.jpg",
-      "/projects/digital-canvas-3.jpg"
+    "futurePlans": [
+      "Add AI-powered plant disease detection using image recognition",
+      "Integrate with weather APIs for location-based care recommendations",
+      "Social features for sharing plant care tips with community",
+      "Mobile app with push notifications for watering reminders"
     ]
   },
   {
     "id": 2,
-    "slug": "motion-studio",
-    "title": "Motion Studio",
-    "category": "Animation",
-    "shortDescription": "Full-stack animation framework for modern web applications",
-    "fullDescription": "A comprehensive animation framework designed to streamline the creation of complex web animations. This full-stack application combines Node.js backend with React frontend, providing developers with powerful tools to build stunning motion graphics.",
-    "image": "from-purple-400 to-pink-500",
-    "color": "#ec4899",
-    "tags": ["GSAP", "TypeScript", "Performance"],
-    "technologies": {
-      "frontend": ["React", "TypeScript", "Tailwind CSS"],
-      "backend": ["Node.js", "Express", "MongoDB"],
-      "animation": ["GSAP", "Three.js"]
-    },
-    "features": [
-      "Animation timeline editor with real-time preview",
-      "Preset animation library with 50+ animations",
-      "Real-time collaboration features",
-      "Export animations to multiple formats",
-      "Performance monitoring dashboard"
-    ],
+    "slug": "food-tracker",
+    "title": "Food Tracker",
+    "category": "FULL-STACK",
+    "description": "A production-ready food management app featuring real-time synchronization, JWT authentication, and optimized performance.",
+    "image": "/assets/images/projects/food.png",
+    "tech": ["React", "Tailwind CSS", "Firebase", "Express.js"],
+    "liveUrl": "https://food-garden-bd.web.app",
+    "frontendUrl": "https://github.com/mehedi-hasan1102/Food-Garden-Client",
+    "backendUrl": "https://github.com/mehedi-hasan1102/Food-Garden-Server",
+    "year": "2025",
     "challenges": [
-      "Building a real-time animation editor",
-      "Handling complex timeline states",
-      "Performance optimization for large animations",
-      "Implementing real-time collaboration"
+      "Implementing JWT token refresh mechanism securely",
+      "Handling large database queries efficiently",
+      "Creating responsive design for multiple screen sizes",
+      "Managing user authentication state properly"
     ],
-    "solutions": [
-      "Redux for state management and timeline control",
-      "WebSocket for real-time collaboration",
-      "Web Workers for animation calculations",
-      "Lazy loading and code splitting"
-    ],
-    "liveUrl": "https://example.com/motion-studio",
-    "githubUrl": "https://github.com/example/motion-studio",
-    "images": [
-      "/projects/motion-studio-1.jpg",
-      "/projects/motion-studio-2.jpg"
+    "futurePlans": [
+      "Add meal planning and recipe suggestions",
+      "Implement nutritional analysis and calorie tracking",
+      "Create shopping list generator from meal plans",
+      "Add barcode scanning for food item management"
     ]
   },
   {
     "id": 3,
-    "slug": "creative-agency",
-    "title": "Creative Agency",
-    "category": "Development",
-    "shortDescription": "Award-nominated agency portfolio with cinematic transitions",
-    "fullDescription": "A stunning agency portfolio website that won recognition for its innovative design and smooth animations. Featuring cinematic transitions, interactive elements, and a beautiful showcase of creative work.",
-    "image": "from-orange-400 to-red-500",
-    "color": "#f97316",
-    "tags": ["Next.js", "Tailwind", "GSAP"],
-    "technologies": {
-      "frontend": ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-      "animation": ["GSAP", "ScrollTrigger", "Framer Motion"],
-      "backend": ["Node.js", "MongoDB"]
-    },
-    "features": [
-      "Cinematic landing page transitions",
-      "Portfolio grid with interactive filters",
-      "Client testimonials carousel",
-      "Blog integration with CMS",
-      "Contact form with backend integration"
-    ],
+    "slug": "duranta-online",
+    "title": "Duranta Online",
+    "category": "FULL-STACK",
+    "description": "Provides high-speed internet and cable services with responsive UI, support center, and admin dashboard.",
+    "image": "/assets/images/projects/duranta.png",
+    "tech": ["Next.js", "TypeScript", "MongoDB", "Node.js"],
+    "liveUrl": "https://duranta-online.vercel.app/",
+    "frontendUrl": "https://github.com/mehedi-hasan1102/Duranta-Online-Client",
+    "backendUrl": "https://github.com/mehedi-hasan1102/Duranta-Online-Server",
+    "year": "2024",
     "challenges": [
-      "Creating cinematic transitions without performance loss",
-      "Implementing complex portfolio filtering",
-      "SEO optimization for Next.js",
-      "CMS integration"
+      "Building complex admin dashboard with real-time analytics",
+      "Handling large volume of customer service requests",
+      "Optimizing page load times for better performance",
+      "Implementing secure payment gateway integration"
     ],
-    "solutions": [
-      "GSAP for performant animations with GPU acceleration",
-      "React Context API for filter state management",
-      "Next.js Static Generation with ISR",
-      "Integrated Strapi CMS for content management"
-    ],
-    "liveUrl": "https://example.com/creative-agency",
-    "githubUrl": "https://github.com/example/creative-agency",
-    "images": [
-      "/projects/creative-agency-1.jpg",
-      "/projects/creative-agency-2.jpg",
-      "/projects/creative-agency-3.jpg",
-      "/projects/creative-agency-4.jpg"
+    "futurePlans": [
+      "Add customer self-service portal for billing",
+      "Implement live chat support system",
+      "Create mobile app for account management",
+      "Add network speed test tool on dashboard"
     ]
   },
   {
     "id": 4,
-    "slug": "e-commerce-platform",
-    "title": "E-Commerce Platform",
-    "category": "Full Stack",
-    "shortDescription": "Modern MERN stack e-commerce with advanced filtering and animations",
-    "fullDescription": "A complete e-commerce platform built with the MERN stack, featuring real-time product filtering, shopping cart management, payment integration, and smooth animations throughout the user journey.",
-    "image": "from-green-400 to-emerald-500",
-    "color": "#10b981",
-    "tags": ["MERN", "MongoDB", "Stripe"],
-    "technologies": {
-      "frontend": ["React", "Redux", "Tailwind CSS"],
-      "backend": ["Node.js", "Express", "MongoDB"],
-      "payment": ["Stripe", "JWT Auth"]
-    },
-    "features": [
-      "Product search and advanced filtering",
-      "User authentication with JWT",
-      "Shopping cart management",
-      "Stripe payment integration",
-      "Order tracking system",
-      "Admin dashboard for product management"
-    ],
+    "slug": "task-manager",
+    "title": "Task Manager",
+    "category": "FULL-STACK",
+    "description": "Responsive Task Management app with real-time updates, optimized state management, and robust validation.",
+    "image": "/assets/images/projects/task.png",
+    "tech": ["Next.js", "TypeScript", "MongoDB", "Mongoose", "Express.js"],
+    "liveUrl": "https://meheditodo.vercel.app",
+    "frontendUrl": "https://github.com/mehedi-hasan1102/task-manager-client",
+    "backendUrl": "https://github.com/mehedi-hasan1102/task-manager-server",
+    "year": "2025",
     "challenges": [
-      "Payment gateway integration",
-      "Real-time cart synchronization",
-      "Complex product filtering logic",
-      "Secure authentication implementation"
+      "Managing complex state for multiple tasks and categories",
+      "Implementing drag-and-drop functionality smoothly",
+      "Ensuring data persistence and real-time sync",
+      "Creating intuitive priority and deadline systems"
     ],
-    "solutions": [
-      "Stripe API for secure payment processing",
-      "Redux for global state management",
-      "MongoDB aggregation for complex queries",
-      "JWT tokens with refresh token rotation"
-    ],
-    "liveUrl": "https://example.com/e-commerce",
-    "githubUrl": "https://github.com/example/e-commerce-platform",
-    "images": [
-      "/projects/ecommerce-1.jpg",
-      "/projects/ecommerce-2.jpg"
+    "futurePlans": [
+      "Add team collaboration features with shared task lists",
+      "Implement recurring tasks and smart scheduling",
+      "Add calendar view for better task visualization",
+      "Create mobile app with offline functionality"
     ]
   },
   {
     "id": 5,
-    "slug": "real-time-chat",
-    "title": "Real-Time Chat App",
-    "category": "Web App",
-    "shortDescription": "WebSocket-powered chat application with real-time notifications",
-    "fullDescription": "A fully functional real-time chat application with WebSocket integration, user presence indicators, typing notifications, and message persistence in MongoDB.",
-    "image": "from-blue-400 to-indigo-500",
-    "color": "#3b82f6",
-    "tags": ["Socket.io", "Node.js", "React"],
-    "technologies": {
-      "frontend": ["React", "Socket.io", "Tailwind CSS"],
-      "backend": ["Node.js", "Express", "Socket.io", "MongoDB"],
-      "database": ["MongoDB"]
-    },
-    "features": [
-      "Real-time messaging with WebSockets",
-      "User presence indicators",
-      "Typing notifications",
-      "Message history with pagination",
-      "User authentication and profiles",
-      "Chat room creation and management"
-    ],
+    "slug": "active-arena",
+    "title": "Active Arena",
+    "category": "FULL-STACK",
+    "description": "Playground management app with real-time synchronization, JWT authentication, and payment integration.",
+    "image": "/assets/images/projects/aarena.png",
+    "tech": ["React", "Stripe", "Firebase", "Tailwind CSS"],
+    "liveUrl": "https://buildbox-a12.web.app",
+    "frontendUrl": "https://github.com/mehedi-hasan1102/Active-Arena-Client",
+    "backendUrl": "https://github.com/mehedi-hasan1102/Active-Arena-Server",
+    "year": "2024",
     "challenges": [
-      "Implementing WebSocket connections",
-      "Managing real-time state synchronization",
-      "Scaling for multiple concurrent users",
-      "Message persistence and retrieval"
+      "Integrating Stripe payment gateway securely",
+      "Managing real-time booking reservations",
+      "Preventing double-booking of time slots",
+      "Handling complex cancellation and refund logic"
     ],
-    "solutions": [
-      "Socket.io for real-time bidirectional communication",
-      "Redux for state management",
-      "MongoDB for efficient message storage",
-      "Connection pooling for database efficiency"
-    ],
-    "liveUrl": "https://example.com/chat",
-    "githubUrl": "https://github.com/example/real-time-chat",
-    "images": [
-      "/projects/chat-1.jpg",
-      "/projects/chat-2.jpg"
+    "futurePlans": [
+      "Add automated email confirmation for bookings",
+      "Implement review and rating system for venues",
+      "Create analytics dashboard for arena owners",
+      "Add multi-language support for international users"
     ]
   },
   {
     "id": 6,
-    "slug": "task-manager",
-    "title": "Task Manager Pro",
-    "category": "Productivity",
-    "shortDescription": "Collaborative task management with drag-and-drop interface",
-    "fullDescription": "A powerful task management application with drag-and-drop functionality, real-time collaboration, team management, and beautiful animations for an excellent user experience.",
-    "image": "from-yellow-400 to-orange-500",
-    "color": "#fbbf24",
-    "tags": ["React", "Firebase", "Tailwind"],
-    "technologies": {
-      "frontend": ["React", "React Beautiful DnD", "TypeScript"],
-      "backend": ["Firebase", "Firestore"],
-      "realtime": ["Firebase Realtime Database"]
-    },
-    "features": [
-      "Drag-and-drop task management",
-      "Real-time collaboration with team members",
-      "Task categories and priorities",
-      "Due date reminders",
-      "Progress tracking with statistics",
-      "File attachments to tasks"
-    ],
+    "slug": "event-explorer",
+    "title": "Event Explorer",
+    "category": "FRONTEND",
+    "description": "Event booking platform where users can browse and reserve seats for local events.",
+    "image": "/assets/images/projects/events.png",
+    "tech": ["React", "Firebase", "Node.js"],
+    "liveUrl": "https://event-explorer-bd.netlify.app",
+    "frontendUrl": "https://github.com/mehedi-hasan1102/Event-Explorer",
+    "backendUrl": "https://github.com/mehedi-hasan1102/Event-Explorer-Server",
+    "year": "2024",
     "challenges": [
-      "Implementing smooth drag-and-drop",
-      "Real-time data synchronization across devices",
-      "Performance with large task lists",
-      "Handling concurrent edits"
+      "Creating smooth filtering and search functionality",
+      "Managing seat selection and availability",
+      "Implementing real-time seat status updates",
+      "Designing responsive event card layouts"
     ],
-    "solutions": [
-      "React Beautiful DnD for smooth drag-and-drop",
-      "Firebase Firestore for real-time sync",
-      "Virtual scrolling for large lists",
-      "Operational transformation for conflict resolution"
+    "futurePlans": [
+      "Add QR code generation for event tickets",
+      "Implement push notifications for event reminders",
+      "Create personalized event recommendations",
+      "Add virtual event support with video streaming"
+    ]
+  },
+  {
+    "id": 7,
+    "slug": "phudu-medical",
+    "title": "Phudu Medical Appointment App",
+    "category": "FRONTEND",
+    "description": "Modern and responsive medical appointment booking app with smooth animations and booking system.",
+    "image": "/assets/images/projects/phudu.png",
+    "tech": ["React", "Tailwind CSS"],
+    "liveUrl": "https://phudu-medical.netlify.app/",
+    "frontendUrl": "https://github.com/mehedi-hasan1102/Phudu-Medical-Apoinment-App",
+    "backendUrl": "",
+    "year": "2024",
+    "challenges": [
+      "Creating smooth appointment scheduling interface",
+      "Implementing doctor availability management",
+      "Handling time zone conversions properly",
+      "Building responsive design for all devices"
     ],
-    "liveUrl": "https://example.com/task-manager",
-    "githubUrl": "https://github.com/example/task-manager",
-    "images": [
-      "/projects/task-1.jpg",
-      "/projects/task-2.jpg"
+    "futurePlans": [
+      "Add telemedicine consultation feature",
+      "Implement prescription management system",
+      "Create patient health records storage",
+      "Add integration with hospital management systems"
+    ]
+  },
+  {
+    "id": 8,
+    "slug": "auction-gallery",
+    "title": "Auction Gallery",
+    "category": "FRONTEND",
+    "description": "React-based auction app with real-time bid system.",
+    "image": "/assets/images/projects/action.png",
+    "tech": ["React", "Tailwind CSS", "DaisyUI"],
+    "liveUrl": "https://auctiongallerybd.netlify.app",
+    "frontendUrl": "https://github.com/mehedi-hasan1102/Auction-Gallery",
+    "backendUrl": "",
+    "year": "2024",
+    "challenges": [
+      "Implementing real-time bidding system",
+      "Managing bid history and tracking",
+      "Preventing duplicate bids in the system",
+      "Creating compelling auction item display"
+    ],
+    "futurePlans": [
+      "Add automated email notifications for outbids",
+      "Implement auction timer with countdown",
+      "Create seller dashboard for auction management",
+      "Add payment processing integration"
     ]
   }
 ]

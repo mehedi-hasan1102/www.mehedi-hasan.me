@@ -13,10 +13,12 @@ interface Project {
   slug: string;
   title: string;
   category: string;
-  shortDescription: string;
+  description: string;
   image: string;
-  color: string;
-  tags: string[];
+  tech: string[];
+  liveUrl: string;
+  githubUrl: string;
+  year: string;
 }
 
 const ProjectCard = ({
@@ -92,9 +94,9 @@ const ProjectCard = ({
             <h3 className={styles.projectTitle}>{project.title}</h3>
           </div>
           <p className={styles.projectCategory}>{project.category}</p>
-          <p className={styles.projectDescription}>{project.shortDescription}</p>
+          <p className={styles.projectDescription}>{project.description}</p>
           <div className={styles.projectTags}>
-            {project.tags.map((tag) => (
+            {project.tech.map((tag) => (
               <span key={tag} className={styles.projectTag}>
                 {tag}
               </span>

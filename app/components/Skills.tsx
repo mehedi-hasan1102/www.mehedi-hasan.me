@@ -1,6 +1,4 @@
-"use client";
-
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styles from "./skills.module.css";
@@ -19,50 +17,7 @@ interface SkillCategory {
   skills: Skill[];
 }
 
-const skillCategories: SkillCategory[] = [
-  {
-    title: "FRONTEND",
-    description: "Building beautiful, responsive interfaces",
-    skills: [
-      { name: "React", icon: "⚛️", color: "#61DAFB" },
-      { name: "Next.js", icon: "▲", color: "#ffffff" },
-      { name: "TypeScript", icon: "TS", color: "#3178C6" },
-      { name: "JavaScript", icon: "JS", color: "#F7DF1E" },
-      { name: "Tailwind", icon: "🎨", color: "#06B6D4" },
-      { name: "GSAP", icon: "●", color: "#88CE02" },
-    ],
-  },
-  {
-    title: "BACKEND",
-    description: "Scalable server-side solutions",
-    skills: [
-      { name: "Node.js", icon: "⬢", color: "#339933" },
-      { name: "Express", icon: "Ex", color: "#ffffff" },
-      { name: "REST API", icon: "{ }", color: "#06B6D4" },
-      { name: "GraphQL", icon: "◈", color: "#E10098" },
-    ],
-  },
-  {
-    title: "DATABASE",
-    description: "Data storage & management",
-    skills: [
-      { name: "MongoDB", icon: "🍃", color: "#47A248" },
-      { name: "PostgreSQL", icon: "🐘", color: "#4169E1" },
-      { name: "MySQL", icon: "🐬", color: "#4479A1" },
-      { name: "Firebase", icon: "🔥", color: "#FFCA28" },
-    ],
-  },
-  {
-    title: "TOOLS",
-    description: "Development & deployment",
-    skills: [
-      { name: "Git", icon: "⎇", color: "#F05032" },
-      { name: "Linux", icon: "🐧", color: "#FCC624" },
-      { name: "Figma", icon: "◐", color: "#F24E1E" },
-      { name: "VS Code", icon: "◆", color: "#007ACC" },
-    ],
-  },
-];
+const orbitSkills = ["CREATIVE", "INNOVATIVE", "DEDICATED", "CURIOUS", "ADAPTABLE", "FOCUSED"];
 
 const MagneticSkillTag = ({
   skill,
@@ -235,14 +190,31 @@ const OrbitingSkill = ({ skill, index, total }: { skill: string; index: number; 
   );
 };
 
-const orbitSkills = ["CREATIVE", "INNOVATIVE", "DEDICATED", "CURIOUS", "ADAPTABLE", "FOCUSED"];
-
 export default function Skills() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const orbitContainerRef = useRef<HTMLDivElement>(null);
   const orbitCardRef = useRef<HTMLDivElement>(null);
   const orbitGlowRef = useRef<HTMLDivElement>(null);
+  const [skillCategories, setSkillCategories] = useState<SkillCategory[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Load skills data from JSON
+  useEffect(() => {
+    const loadSkills = async () => {
+      try {
+        const response = await fetch("/data/skills.json");
+        const data = await response.json();
+        setSkillCategories(data);
+      } catch (error) {
+        console.error("Error loading skills data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadSkills();
+  }, []);
 
   useEffect(() => {
     const header = headerRef.current;
@@ -334,6 +306,7 @@ export default function Skills() {
 
   return (
     <section ref={sectionRef} className={styles.skillsSection} id="skills">
+      {loading && <div style={{ textAlign: 'center', padding: '2rem' }}>Loading skills...</div>}
       {/* Gradient Orbs Background */}
       <div className={`${styles.skillsOrb} ${styles.skillsOrb1}`} />
       <div className={`${styles.skillsOrb} ${styles.skillsOrb2}`} />

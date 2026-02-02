@@ -13,25 +13,15 @@ interface Project {
   slug: string;
   title: string;
   category: string;
-  shortDescription: string;
-  fullDescription: string;
+  description: string;
   image: string;
-  color: string;
-  tags: string[];
-  technologies: {
-    frontend?: string[];
-    backend?: string[];
-    animation?: string[];
-    payment?: string[];
-    database?: string[];
-    realtime?: string[];
-  };
-  features: string[];
-  challenges: string[];
-  solutions: string[];
+  tech: string[];
   liveUrl: string;
-  githubUrl: string;
-  images: string[];
+  frontendUrl: string;
+  backendUrl: string;
+  year: string;
+  challenges?: string[];
+  futurePlans?: string[];
 }
 
 export default function ProjectDetails() {
@@ -129,15 +119,13 @@ export default function ProjectDetails() {
     );
   }
 
-  const allTechs = Object.values(project.technologies).flat().filter(Boolean);
-
   return (
     <div ref={pageRef} className="min-h-screen" style={{ background: 'var(--bg)' }}>
       {/* Hero Section */}
       <section
         className="relative overflow-hidden py-20 md:py-32"
         style={{
-          background: `linear-gradient(135deg, ${project.color}20, ${project.color}10)`,
+          background: `linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(6, 182, 212, 0.05))`,
         }}
       >
         <div className="container mx-auto px-4 md:px-6">
@@ -147,7 +135,7 @@ export default function ProjectDetails() {
               <button
                 onClick={() => router.back()}
                 className="text-sm font-semibold"
-                style={{ color: project.color }}
+                style={{ color: 'var(--accent)' }}
               >
                 ← Back
               </button>
@@ -173,7 +161,7 @@ export default function ProjectDetails() {
               className="text-lg md:text-xl mb-8 max-w-2xl"
               style={{ color: 'var(--text-secondary)' }}
             >
-              {project.shortDescription}
+              {project.description}
             </p>
 
             {/* CTA Buttons */}
@@ -184,8 +172,8 @@ export default function ProjectDetails() {
                 rel="noopener noreferrer"
                 className="px-6 py-3 rounded-lg font-semibold transition-all hover:scale-105"
                 style={{
-                  background: project.color,
-                  color: 'white',
+                  background: 'var(--accent)',
+                  color: 'var(--bg)',
                 }}
               >
                 View Live Project 🚀
@@ -196,8 +184,8 @@ export default function ProjectDetails() {
                 rel="noopener noreferrer"
                 className="px-6 py-3 rounded-lg font-semibold transition-all border hover:scale-105"
                 style={{
-                  borderColor: project.color,
-                  color: project.color,
+                  borderColor: 'var(--accent)',
+                  color: 'var(--accent)',
                 }}
               >
                 View Source Code 💻
@@ -207,11 +195,31 @@ export default function ProjectDetails() {
         </div>
       </section>
 
+      {/* Project Image Section */}
+      <section className="py-16 md:py-24 border-b" style={{ borderColor: 'rgba(6, 182, 212, 0.1)' }}>
+        <div className="container mx-auto px-4 md:px-6">
+          <div 
+            className="rounded-xl overflow-hidden border"
+            style={{ borderColor: 'rgba(6, 182, 212, 0.2)' }}
+          >
+            <img 
+              src={project.image} 
+              alt={project.title}
+              className="w-full h-auto object-cover"
+              style={{ maxHeight: '500px', objectFit: 'cover' }}
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Full Description */}
       <section data-section className="py-16 md:py-24 border-b" style={{ borderColor: 'rgba(34, 211, 238, 0.1)' }}>
         <div className="container mx-auto px-4 md:px-6 max-w-4xl">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: 'var(--text)' }}>
+            About This Project
+          </h2>
           <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-            {project.fullDescription}
+            {project.description}
           </p>
         </div>
       </section>
@@ -221,110 +229,47 @@ export default function ProjectDetails() {
         <div className="container mx-auto px-4 md:px-6 max-w-4xl">
           <h2
             className="text-3xl md:text-4xl font-bold mb-12"
-            style={{
-              color: 'var(--text)',
-              backgroundImage: `linear-gradient(135deg, var(--text) 0%, ${project.color} 100%)`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
+            style={{ color: 'var(--text)' }}
           >
             Technologies Used
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {Object.entries(project.technologies).map(([category, techs]) => (
-              techs && techs.length > 0 && (
-                <div key={category}>
-                  <h3
-                    className="text-lg font-semibold mb-4 capitalize"
-                    style={{ color: project.color }}
-                  >
-                    {category}
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {techs.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1.5 rounded-lg text-sm font-medium"
-                        style={{
-                          background: `${project.color}20`,
-                          color: project.color,
-                          border: `1px solid ${project.color}40`,
-                        }}
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )
+          <div className="flex flex-wrap gap-2">
+            {project.tech.map((tech) => (
+              <span
+                key={tech}
+                className="px-4 py-2 rounded-lg text-sm font-medium"
+                style={{
+                  background: 'rgba(6, 182, 212, 0.1)',
+                  color: 'var(--accent)',
+                  border: '1px solid rgba(6, 182, 212, 0.3)',
+                }}
+              >
+                {tech}
+              </span>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Features */}
+      {/* Challenges & Future Plans */}
       <section data-section className="py-16 md:py-24 border-b" style={{ borderColor: 'rgba(34, 211, 238, 0.1)' }}>
         <div className="container mx-auto px-4 md:px-6 max-w-4xl">
-          <h2
-            className="text-3xl md:text-4xl font-bold mb-12"
-            style={{
-              color: 'var(--text)',
-              backgroundImage: `linear-gradient(135deg, var(--text) 0%, ${project.color} 100%)`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            Key Features
-          </h2>
-
-          <div className="space-y-4">
-            {project.features.map((feature, idx) => (
-              <div key={idx} className="flex gap-4">
-                <div
-                  className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold"
-                  style={{
-                    background: project.color,
-                    color: 'white',
-                  }}
-                >
-                  ✓
-                </div>
-                <p style={{ color: 'var(--text-secondary)' }} className="text-lg">
-                  {feature}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Challenges & Solutions */}
-      <section data-section className="py-16 md:py-24 border-b" style={{ borderColor: 'rgba(34, 211, 238, 0.1)' }}>
-        <div className="container mx-auto px-4 md:px-6 max-w-4xl">
-          <h2
-            className="text-3xl md:text-4xl font-bold mb-12"
-            style={{
-              color: 'var(--text)',
-              backgroundImage: `linear-gradient(135deg, var(--text) 0%, ${project.color} 100%)`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            Challenges & Solutions
+          <h2 className="text-3xl md:text-4xl font-bold mb-12" style={{ color: 'var(--text)' }}>
+            Challenges & Future Plans
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Challenges */}
             <div>
-              <h3 className="text-xl font-semibold mb-6" style={{ color: project.color }}>
-                🔴 Challenges
+              <h3 className="text-xl font-semibold mb-6 flex items-center gap-2" style={{ color: 'var(--accent)' }}>
+                <span>🔴</span> Challenges
               </h3>
               <ul className="space-y-3">
-                {project.challenges.map((challenge, idx) => (
+                {project.challenges && project.challenges.map((challenge, idx) => (
                   <li key={idx} className="flex gap-3">
-                    <span style={{ color: project.color }} className="flex-shrink-0">
-                      •
+                    <span style={{ color: 'var(--accent)' }} className="flex-shrink-0 mt-1">
+                      ●
                     </span>
                     <span style={{ color: 'var(--text-secondary)' }}>{challenge}</span>
                   </li>
@@ -332,18 +277,18 @@ export default function ProjectDetails() {
               </ul>
             </div>
 
-            {/* Solutions */}
+            {/* Future Plans */}
             <div>
-              <h3 className="text-xl font-semibold mb-6" style={{ color: project.color }}>
-                🟢 Solutions
+              <h3 className="text-xl font-semibold mb-6 flex items-center gap-2" style={{ color: 'var(--accent)' }}>
+                <span>🟢</span> Future Plans
               </h3>
               <ul className="space-y-3">
-                {project.solutions.map((solution, idx) => (
+                {project.futurePlans && project.futurePlans.map((plan, idx) => (
                   <li key={idx} className="flex gap-3">
-                    <span style={{ color: project.color }} className="flex-shrink-0">
+                    <span style={{ color: 'var(--accent)' }} className="flex-shrink-0 mt-1">
                       ✓
                     </span>
-                    <span style={{ color: 'var(--text-secondary)' }}>{solution}</span>
+                    <span style={{ color: 'var(--text-secondary)' }}>{plan}</span>
                   </li>
                 ))}
               </ul>
@@ -356,21 +301,50 @@ export default function ProjectDetails() {
       <section data-section className="py-16 md:py-24">
         <div className="container mx-auto px-4 md:px-6 max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: 'var(--text)' }}>
-            Interested in working together?
+            View This Project
           </h2>
-          <p style={{ color: 'var(--text-secondary)' }} className="text-lg mb-8">
-            Let&#39;s build something amazing together!
-          </p>
-          <Link
-            href="#contact"
-            className="inline-block px-8 py-3 rounded-lg font-semibold transition-all hover:scale-105"
-            style={{
-              background: `linear-gradient(135deg, ${project.color}, #7c3aed)`,
-              color: 'white',
-            }}
-          >
-            Get in Touch 💌
-          </Link>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3 rounded-lg font-semibold transition-all hover:scale-105"
+              style={{
+                background: 'var(--accent)',
+                color: 'var(--bg)',
+              }}
+            >
+              View Live Project 🚀
+            </a>
+            {project.frontendUrl && (
+              <a
+                href={project.frontendUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3 rounded-lg font-semibold transition-all border"
+                style={{
+                  borderColor: 'var(--accent)',
+                  color: 'var(--accent)',
+                }}
+              >
+                Frontend Code 💻
+              </a>
+            )}
+            {project.backendUrl && (
+              <a
+                href={project.backendUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3 rounded-lg font-semibold transition-all border"
+                style={{
+                  borderColor: 'var(--accent)',
+                  color: 'var(--accent)',
+                }}
+              >
+                Backend Code 🔧
+              </a>
+            )}
+          </div>
         </div>
       </section>
     </div>
