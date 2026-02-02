@@ -1,0 +1,112 @@
+.section {
+  width: 100%;
+  padding: 4rem 0;
+  position: relative;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.description {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.graphContainer {
+  margin-bottom: 2.5rem;
+}
+
+.graphWrapper {
+  background: var(--card-bg);
+  border: 1px solid rgba(34, 211, 238, 0.15);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.graphWrapper:hover {
+  border-color: rgba(34, 211, 238, 0.3);
+  box-shadow: 0 8px 30px rgba(34, 211, 238, 0.15);
+  transform: translateY(-4px);
+}
+
+.graph {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0.5rem;
+}
+
+.footer {
+  text-align: center;
+  padding-top: 1rem;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+}
+
+.link:hover {
+  color: var(--accent);
+  background: rgba(34, 211, 238, 0.05);
+  border-color: rgba(34, 211, 238, 0.2);
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .graphWrapper {
+    padding: 1.5rem;
+  }
+
+  .section {
+    padding: 2rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .graphWrapper {
+    padding: 1rem;
+  }
+}
