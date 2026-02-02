@@ -1,5 +1,5 @@
 /* ============================================
-   PREMIUM PROJECT DETAILS PAGE - Awwwards Style
+   MODERN PROJECT DETAILS PAGE - Portfolio Style
    ============================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
@@ -7,13 +7,12 @@
 /* Hero Section */
 .heroSection {
   position: relative;
-  min-height: auto;
+  min-height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  padding: 6rem 0;
-  z-index: 1;
+  padding: 8rem 4rem 4rem;
+  background: var(--bg);
 }
 
 .heroBackground {
@@ -23,19 +22,11 @@
   right: 0;
   bottom: 0;
   z-index: 0;
-}
-
-.heroGrid {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  opacity: 0.03;
   background-image: 
-    linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px);
   background-size: 50px 50px;
-  z-index: 0;
 }
 
 .heroContent {
@@ -43,7 +34,6 @@
   z-index: 2;
   max-width: 1400px;
   width: 100%;
-  padding: 0 4rem;
   margin: 0 auto;
 }
 
@@ -85,41 +75,48 @@
   border: 1px solid rgba(6, 182, 212, 0.3);
 }
 
-.heroTitle {
-  font-family: 'Staatliches', serif;
-  font-size: clamp(3rem, 8vw, 6rem);
-  font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: 0.02em;
-  color: var(--text);
-  margin-bottom: 1.5rem;
-  text-transform: uppercase;
+/* Hero Title Section - Two Column Layout */
+.heroTitleSection {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 6rem;
+  margin-top: 3rem;
+  align-items: start;
 }
 
-.heroTitleGradient {
-  background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.titleWrapper {
+  flex: 1;
+}
+
+.heroTitle {
+  font-family: 'Staatliches', serif;
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  margin-bottom: 2rem;
+  text-transform: uppercase;
 }
 
 .heroDescription {
   font-family: system-ui, -apple-system, sans-serif;
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  line-height: 1.6;
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.8;
   color: var(--text-secondary);
-  max-width: 800px;
-  margin-bottom: 2rem;
+  max-width: 600px;
 }
 
-.heroMeta {
+/* Project Meta - Right Side */
+.projectMeta {
   display: flex;
-  gap: 3rem;
-  margin-bottom: 2.5rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  border-left: 1px solid rgba(6, 182, 212, 0.2);
 }
 
-.metaItem {
+.metaRow {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -135,9 +132,204 @@
 
 .metaValue {
   font-family: 'Staatliches', serif;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
+  color: var(--text);
+  letter-spacing: 0.05em;
+}
+
+.metaLink {
+  font-family: 'Staatliches', serif;
+  font-size: 1.25rem;
   color: var(--accent);
   letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.metaLink:hover {
+  color: var(--text);
+}
+
+/* Main Image Section */
+.mainImageSection {
+  padding: 4rem 4rem;
+  background: var(--bg);
+}
+
+.imageContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.projectImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Gallery Section */
+.gallerySection {
+  padding: 2rem 4rem;
+  background: var(--bg);
+}
+
+.galleryGrid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.galleryItem {
+  overflow: hidden;
+  border-radius: 16px;
+  background: rgba(6, 182, 212, 0.03);
+}
+
+.galleryItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.galleryItem:hover img {
+  transform: scale(1.05);
+}
+
+/* Text Sections (Challenges, Solutions) */
+.textSection {
+  padding: 6rem 4rem;
+  background: var(--bg);
+}
+
+.textContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+.textLabel {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-secondary);
+  font-weight: 600;
+  position: sticky;
+  top: 100px;
+}
+
+.textBody {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.textBody p {
+  margin-bottom: 1.5rem;
+}
+
+/* Tools/Tech Stack Section */
+.toolsSection {
+  padding: 6rem 4rem;
+  background: rgba(6, 182, 212, 0.02);
+}
+
+.techStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.techBadge {
+  padding: 0.75rem 1.5rem;
+  background: var(--bg);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  border-radius: 50px;
+  color: var(--text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+}
+
+.techBadge:hover {
+  border-color: var(--accent);
+  background: rgba(6, 182, 212, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Additional Image Section */
+.additionalImageSection {
+  padding: 4rem 4rem;
+  background: var(--bg);
+}
+
+.showcaseImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+}
+
+/* CTA Buttons Section */
+.ctaButtonsSection {
+  padding: 6rem 4rem;
+  background: var(--bg);
+  text-align: center;
+}
+
+.buttonGroup {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ctaButton {
+  padding: 1.25rem 3rem;
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: all 0.4s ease;
+  display: inline-block;
+}
+
+.ctaButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(6, 182, 212, 0.3);
+}
+
+.ctaButtonSecondary {
+  padding: 1.25rem 3rem;
+  background: transparent;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  border: 2px solid var(--accent);
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.ctaButtonSecondary:hover {
+  background: rgba(6, 182, 212, 0.1);
+  transform: translateY(-2px);
 }
 
 .heroCTA {
@@ -248,10 +440,11 @@
 
 .contentGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 6rem;
   align-items: start;
 }
+
 
 .contentBlock {
   font-family: system-ui, -apple-system, sans-serif;
@@ -328,148 +521,93 @@
   opacity: 1;
 }
 
-/* Challenges & Plans Section */
-.challengesSection {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 8rem 4rem;
-}
-
-.challengesGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-}
-
-.challengeBlock {
-  position: relative;
-  padding: 3rem;
-  border-radius: 24px;
-  background: rgba(6, 182, 212, 0.03);
-  border: 1px solid rgba(6, 182, 212, 0.1);
-  transition: all 0.4s ease;
-}
-
-.challengeBlock:hover {
-  border-color: rgba(6, 182, 212, 0.3);
-  transform: translateY(-5px);
-}
-
-.challengeTitle {
-  font-family: 'Staatliches', serif;
-  font-size: 2rem;
-  letter-spacing: 0.15em;
-  color: var(--accent);
-  margin-bottom: 2rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.challengeIcon {
-  font-size: 2rem;
-}
-
-.challengeList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.challengeItem {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  font-family: system-ui, -apple-system, sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
-}
-
-.challengeBullet {
-  color: var(--accent);
-  font-weight: bold;
-  flex-shrink: 0;
-  margin-top: 0.25rem;
-}
-
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .heroContent,
-  .imageContainer,
-  .contentSection,
-  .challengesSection {
-    padding-left: 2rem;
-    padding-right: 2rem;
+  .heroSection {
+    padding: 6rem 2rem 3rem;
   }
 
-  .techSection {
-    padding: 8rem 2rem;
-  }
-
-  .techSection h2 {
-    margin-bottom: 2rem;
-  }
-
-  .contentGrid,
-  .challengesGrid {
+  .heroTitleSection {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
 
-  .heroTitle {
-    font-size: clamp(2.5rem, 8vw, 5rem);
+  .projectMeta {
+    border-left: none;
+    border-top: 1px solid rgba(6, 182, 212, 0.2);
+    padding: 2rem 0 0;
   }
 
-  .techGrid {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  .textContent {
+    grid-template-columns: 150px 1fr;
+    gap: 3rem;
+  }
+
+  .mainImageSection,
+  .gallerySection,
+  .textSection,
+  .toolsSection,
+  .additionalImageSection,
+  .ctaButtonsSection {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .galleryGrid {
+    gap: 1.5rem;
   }
 }
 
 @media (max-width: 768px) {
-  .heroContent,
-  .imageContainer,
-  .contentSection,
-  .challengesSection {
+  .heroSection {
+    padding: 5rem 1.5rem 2rem;
+  }
+
+  .heroTitle {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+
+  .heroDescription {
+    font-size: 1rem;
+  }
+
+  .textContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .textLabel {
+    position: static;
+  }
+
+  .galleryGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .mainImageSection,
+  .gallerySection,
+  .textSection,
+  .toolsSection,
+  .additionalImageSection,
+  .ctaButtonsSection {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
 
-  .techSection {
-    padding: 6rem 1.5rem;
+  .textSection,
+  .toolsSection {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
 
-  .techSection h2 {
-    font-size: clamp(2rem, 5vw, 3rem);
-    margin-bottom: 2rem;
-  }
-
-  .heroMeta {
-    gap: 2rem;
-  }
-
-  .heroCTA {
+  .buttonGroup {
     flex-direction: column;
-    align-items: stretch;
   }
 
-  .primaryButton,
-  .secondaryButton {
-    justify-content: center;
+  .ctaButton,
+  .ctaButtonSecondary {
     width: 100%;
-  }
-
-  .challengeBlock {
-    padding: 2rem;
-  }
-
-  .techGrid {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 1rem;
-  }
-
-  .techCard {
-    padding: 1.5rem 1rem;
-    font-size: 1rem;
+    text-align: center;
   }
 }

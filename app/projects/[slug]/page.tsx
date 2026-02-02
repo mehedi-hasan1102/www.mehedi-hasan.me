@@ -169,24 +169,9 @@ export default function ProjectDetails() {
 
   return (
     <div ref={pageRef} className="min-h-screen" style={{ background: 'var(--bg)' }}>
-      {/* Project Image Showcase - Top Position */}
-      <section className={styles.imageSection} data-reveal-section style={{ paddingTop: '0' }}>
-        <div className={styles.imageContainer}>
-          <div className={styles.imageWrapper} >
-            <img
-              src={project.image}
-              alt={project.title}
-              className={styles.projectImage}
-              data-parallax-image
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Hero Section - Premium Design */}
+      {/* Hero Section with Title Overlay */}
       <section className={styles.heroSection}>
         <div className={styles.heroBackground} />
-        <div className={styles.heroGrid} />
         
         <div className={styles.heroContent}>
           {/* Breadcrumb */}
@@ -198,98 +183,116 @@ export default function ProjectDetails() {
             <span className={styles.categoryBadge}>{project.category}</span>
           </div>
 
-          {/* Title with char animation */}
-          <h1 className={styles.heroTitle}>
-            {project.title.split('').map((char, i) => (
-              <span key={i} className="hero-title-char" style={{ display: 'inline-block' }}>
-                {char === ' ' ? '\u00A0' : char}
-              </span>
-            ))}
-          </h1>
-
-          <p className={styles.heroDescription} data-hero-animate>
-            {project.description}
-          </p>
-
-          {/* Meta Information */}
-          <div className={styles.heroMeta} data-hero-animate>
-            <div className={styles.metaItem}>
-              <span className={styles.metaLabel}>Year</span>
-              <span className={styles.metaValue}>{project.year}</span>
+          <div className={styles.heroTitleSection}>
+            {/* Title with char animation */}
+            <div className={styles.titleWrapper}>
+              <h1 className={styles.heroTitle}>
+                {project.title.split('').map((char, i) => (
+                  <span key={i} className="hero-title-char" style={{ display: 'inline-block' }}>
+                    {char === ' ' ? '\u00A0' : char}
+                  </span>
+                ))}
+              </h1>
+              <p className={styles.heroDescription} data-hero-animate>
+                {project.description}
+              </p>
             </div>
-            <div className={styles.metaItem}>
-              <span className={styles.metaLabel}>Category</span>
-              <span className={styles.metaValue}>{project.category}</span>
-            </div>
-            <div className={styles.metaItem}>
-              <span className={styles.metaLabel}>Technologies</span>
-              <span className={styles.metaValue}>{project.tech.length}+</span>
+
+            {/* Project Meta Info - Right Side */}
+            <div className={styles.projectMeta} data-hero-animate>
+              <div className={styles.metaRow}>
+                <span className={styles.metaLabel}>Status</span>
+                <span className={styles.metaValue}>COMPLETED</span>
+              </div>
+              <div className={styles.metaRow}>
+                <span className={styles.metaLabel}>Duration</span>
+                <span className={styles.metaValue}>1 Month</span>
+              </div>
+              <div className={styles.metaRow}>
+                <span className={styles.metaLabel}>Live Website →</span>
+                <a 
+                  href={project.liveUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className={styles.metaLink}
+                >
+                  View Site
+                </a>
+              </div>
+              <div className={styles.metaRow}>
+                <span className={styles.metaLabel}>Role</span>
+                <span className={styles.metaValue}>FULL-STACK DEV</span>
+              </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* CTA Buttons */}
-          <div className={styles.heroCTA} data-hero-animate>
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.primaryButton}
-            >
-              VIEW LIVE PROJECT
-              <span>→</span>
-            </a>
-            {project.frontendUrl && (
-              <a
-                href={project.frontendUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.secondaryButton}
-              >
-                FRONTEND CODE
-              </a>
-            )}
-            {project.backendUrl && (
-              <a
-                href={project.backendUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.secondaryButton}
-              >
-                BACKEND CODE
-              </a>
+      {/* Main Project Image */}
+      <section className={styles.mainImageSection} data-reveal-section>
+        <div className={styles.imageContainer}>
+          <img
+            src={project.image}
+            alt={project.title}
+            className={styles.projectImage}
+            data-parallax-image
+          />
+        </div>
+      </section>
+
+      {/* Project Gallery Grid */}
+      <section className={styles.gallerySection} data-reveal-section>
+        <div className={styles.galleryGrid}>
+          <div className={styles.galleryItem}>
+            <img src={project.image} alt={`${project.title} desktop view`} />
+          </div>
+          <div className={styles.galleryItem}>
+            <img src={project.image} alt={`${project.title} mobile view`} />
+          </div>
+        </div>
+      </section>
+
+      {/* Challenges Section */}
+      <section className={styles.textSection} data-reveal-section>
+        <div className={styles.textContent}>
+          <h3 className={styles.textLabel}>Challenges.</h3>
+          <div className={styles.textBody}>
+            {project.challenges && project.challenges.length > 0 ? (
+              <p>{project.challenges.join('. ')}</p>
+            ) : (
+              <p>
+                This project presented unique challenges in terms of performance optimization,
+                user experience design, and scalable architecture implementation.
+              </p>
             )}
           </div>
         </div>
       </section>
 
-      {/* About Project - Two Column Layout */}
-      <section className={styles.contentSection} data-reveal-section>
-        <h2 className={styles.sectionTitle}>
-          ABOUT <span className={styles.sectionTitleAccent}>THE PROJECT</span>
-        </h2>
-        <div className={styles.contentGrid}>
-          <div className={styles.contentBlock}>
-            <p>{project.description}</p>
-          </div>
-          <div className={styles.contentBlock}>
-            <p>
-              This project showcases modern web development practices with a focus on
-              user experience, performance optimization, and scalable architecture.
-              Built with cutting-edge technologies to deliver exceptional results.
-            </p>
+      {/* Solutions Section */}
+      <section className={styles.textSection} data-reveal-section>
+        <div className={styles.textContent}>
+          <h3 className={styles.textLabel}>Solutions.</h3>
+          <div className={styles.textBody}>
+            {project.futurePlans && project.futurePlans.length > 0 ? (
+              <p>{project.futurePlans.join('. ')}</p>
+            ) : (
+              <p>
+                Implemented modern development practices with focus on code quality,
+                performance optimization, and seamless user experience across all devices.
+              </p>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Technologies - Grid Cards */}
-      <section className={styles.techSection} data-reveal-section>
-        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          <h2 className={styles.sectionTitle}>
-            TECH <span className={styles.sectionTitleAccent}>STACK</span>
-          </h2>
-          <div className={styles.techGrid}>
+      {/* Tech Stack / Tools Section */}
+      <section className={styles.toolsSection} data-reveal-section>
+        <div className={styles.textContent}>
+          <h3 className={styles.textLabel}>Tools.</h3>
+          <div className={styles.techStack}>
             {project.tech && project.tech.length > 0 && project.tech.map((tech) => (
-              <div key={tech} className={styles.techCard}>
+              <div key={tech} className={styles.techBadge}>
                 {tech}
               </div>
             ))}
@@ -297,48 +300,40 @@ export default function ProjectDetails() {
         </div>
       </section>
 
-      {/* Challenges & Future Plans - Premium Cards */}
-      <section className={styles.challengesSection} data-reveal-section>
-        <h2 className={styles.sectionTitle}>
-          CHALLENGES & <span className={styles.sectionTitleAccent}>FUTURE</span>
-        </h2>
-        <div className={styles.challengesGrid}>
-          {/* Challenges Block */}
-          <div className={styles.challengeBlock}>
-            <h3 className={styles.challengeTitle}>
-              <span className={styles.challengeIcon}>🔴</span>
-              CHALLENGES
-            </h3>
-            <ul className={styles.challengeList}>
-              {project.challenges?.map((challenge, idx) => (
-                <li key={idx} className={styles.challengeItem} data-challenge-item>
-                  <span className={styles.challengeBullet}>●</span>
-                  <span>{challenge}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Future Plans Block */}
-          <div className={styles.challengeBlock}>
-            <h3 className={styles.challengeTitle}>
-              <span className={styles.challengeIcon}>🟢</span>
-              FUTURE PLANS
-            </h3>
-            <ul className={styles.challengeList}>
-              {project.futurePlans?.map((plan, idx) => (
-                <li key={idx} className={styles.challengeItem} data-challenge-item>
-                  <span className={styles.challengeBullet}>✓</span>
-                  <span>{plan}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+      {/* Additional Project Image */}
+      <section className={styles.additionalImageSection} data-reveal-section>
+        <div className={styles.imageContainer}>
+          <img
+            src={project.image}
+            alt={`${project.title} showcase`}
+            className={styles.showcaseImage}
+          />
         </div>
       </section>
 
-      {/* CTA Section - Grand Finale */}
-     
+      {/* CTA Buttons Section */}
+      <section className={styles.ctaButtonsSection} data-reveal-section>
+        <div className={styles.buttonGroup}>
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.ctaButton}
+          >
+            VISIT LIVE SITE →
+          </a>
+          {project.frontendUrl && (
+            <a
+              href={project.frontendUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.ctaButtonSecondary}
+            >
+              VIEW CODE
+            </a>
+          )}
+        </div>
+      </section>
     </div>
   );
 }
