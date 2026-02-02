@@ -298,6 +298,46 @@
   transform: translateY(3px);
 }
 
+/* Footer Scrolling Text */
+.footerBigTextWrapper {
+  background: rgba(6, 182, 212, 0.03);
+  padding: 1.5rem 0;
+  overflow: hidden;
+  margin-top: 0;
+}
+
+.bigTextScroll {
+  display: flex;
+  width: max-content;
+}
+
+.bigTextScroll span {
+  display: inline-block;
+  font-family: var(--font-staatliches), sans-serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.3em;
+  color: rgba(6, 182, 212, 0.4);
+  white-space: nowrap;
+  animation: scrollText 20s linear infinite;
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+:global(.light-mode) .footerBigTextWrapper {
+  background: rgba(6, 182, 212, 0.06);
+}
+
+:global(.light-mode) .bigTextScroll span {
+  color: rgba(6, 182, 212, 0.6);
+}
+
 .downloadButton span,
 .downloadButton svg,
 .downloadButton {

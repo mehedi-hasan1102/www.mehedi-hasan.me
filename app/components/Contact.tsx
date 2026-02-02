@@ -65,80 +65,94 @@ export default function Contact() {
   ];
 
   return (
-    <section
-      id="contact"
-      ref={sectionRef}
-      className={`relative overflow-hidden py-20 md:py-32 px-4 md:px-8 ${styles.contactSection}`}
-      style={{ background: 'var(--bg)' }}
-    >
-      {/* Background Gradient Orbs */}
-      <div className={styles.contactDecor1} />
-      <div className={styles.contactDecor2} />
+    <>
+      <section
+        id="contact"
+        ref={sectionRef}
+        className={`relative overflow-hidden py-20 md:py-32 px-4 md:px-8 ${styles.contactSection}`}
+        style={{ background: 'var(--bg)' }}
+      >
+        {/* Background Gradient Orbs */}
+        <div className={styles.contactDecor1} />
+        <div className={styles.contactDecor2} />
 
-      <div className="container relative z-10 max-w-7xl">
-        {/* Main Heading */}
-        <div ref={headingRef} className={styles.footerHeading}>
-          LET&apos;S TALK
-        </div>
+        <div className="container relative z-10 max-w-7xl">
+          {/* Main Heading */}
+          <div ref={headingRef} className={styles.footerHeading}>
+            LET&apos;S TALK
+          </div>
 
-        {/* Email */}
-        <div style={{ textAlign: 'center' }}>
-          <a
-            href="mailto:mehedi.hasan11023@gmail.com"
-            className={styles.emailDisplay}
-          >
-            mehedi.hasan11023@gmail.com
-          </a>
-        </div>
+          {/* Email */}
+          <div style={{ textAlign: 'center' }}>
+            <a
+              href="mailto:mehedi.hasan11023@gmail.com"
+              className={styles.emailDisplay}
+            >
+              mehedi.hasan11023@gmail.com
+            </a>
+          </div>
 
-        {/* Content Grid */}
-        <div className={styles.footerGrid}>
-          {/* Socials */}
-          <div className={styles.footerColumn}>
-            <p className={styles.columnLabel}>SOCIALS</p>
-            <div className={styles.socialButtons}>
-              {socials.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.socialLink}
-                >
-                  {social.label}
-                </a>
-              ))}
+          {/* Content Grid */}
+          <div className={styles.footerGrid}>
+            {/* Socials */}
+            <div className={styles.footerColumn}>
+              <p className={styles.columnLabel}>SOCIALS</p>
+              <div className={styles.socialButtons}>
+                {socials.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.socialLink}
+                  >
+                    {social.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Location & Local Time */}
+            <div className={styles.footerColumn}>
+              <p className={styles.columnLabel}>LOCATION & TIME</p>
+              <div className={styles.locationInfo}>
+                <p className={styles.locationCity}>DHAKA</p>
+                <p className={styles.locationCountry}>BANGLADESH</p>
+                <p className={styles.currentTime}>{currentTime || '00:00:00 AM'}</p>
+              </div>
+            </div>
+
+            {/* Availability */}
+            <div className={styles.footerColumn}>
+              <p className={styles.columnLabel}>AVAILABILITY</p>
+              <div className={styles.availabilityStatus}>
+                <span className={styles.availabilityDot} />
+                <span className={styles.availabilityText}>OPEN FOR OPPORTUNITIES</span>
+              </div>
             </div>
           </div>
 
-          {/* Location & Local Time */}
-          <div className={styles.footerColumn}>
-            <p className={styles.columnLabel}>LOCATION & TIME</p>
-            <div className={styles.locationInfo}>
-              <p className={styles.locationCity}>DHAKA</p>
-              <p className={styles.locationCountry}>BANGLADESH</p>
-              <p className={styles.currentTime}>{currentTime || '00:00:00 AM'}</p>
-            </div>
-          </div>
-
-          {/* Availability */}
-          <div className={styles.footerColumn}>
-            <p className={styles.columnLabel}>AVAILABILITY</p>
-            <div className={styles.availabilityStatus}>
-              <span className={styles.availabilityDot} />
-              <span className={styles.availabilityText}>OPEN FOR OPPORTUNITIES</span>
-            </div>
+          {/* Download CV Button */}
+          <div className={styles.downloadSection}>
+            <a href="/cv.pdf" download className={styles.downloadButton}>
+              <span>DOWNLOAD CV</span>
+              <FiDownload size={20} />
+            </a>
           </div>
         </div>
+      </section>
 
-        {/* Download CV Button */}
-        <div className={styles.downloadSection}>
-          <a href="/cv.pdf" download className={styles.downloadButton}>
-            <span>DOWNLOAD CV</span>
-            <FiDownload size={20} />
-          </a>
+      {/* Footer Scrolling Text */}
+      <div className={styles.footerBigTextWrapper}>
+        <div className={styles.bigTextScroll}>
+          <span>
+            HIRE ME • OPEN FOR OPPORTUNITIES • LET&apos;S BUILD SOMETHING GREAT •
+          </span>
+          <span>
+            HIRE ME • OPEN FOR OPPORTUNITIES • LET&apos;S BUILD SOMETHING GREAT •
+          </span>
         </div>
       </div>
-    </section>
+    </>
   );
 }
