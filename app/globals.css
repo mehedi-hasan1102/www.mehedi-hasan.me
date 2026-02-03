@@ -245,7 +245,7 @@ html.light-mode .btn-secondary::before {
 }
 
 html.light-mode .btn-secondary:hover {
-  color: #fff;
+  color: var(--accent);
   border-color: var(--accent);
 }
 
