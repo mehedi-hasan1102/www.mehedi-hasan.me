@@ -113,89 +113,6 @@ html.light-mode .notFoundImage {
   gap: 1rem;
 }
 
-.backButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1.25rem 2.5rem;
-  border-radius: 50px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: transparent;
-  font-family: 'Staatliches', 'Staatliches Fallback', sans-serif;
-  font-size: 1rem;
-  letter-spacing: 0.15em;
-  color: rgb(255, 255, 255);
-  cursor: pointer;
-  transition: all 0.4s ease;
-  font-weight: 400;
-  text-decoration: none;
-  position: relative;
-  overflow: hidden;
-}
-
-:global(.light-mode) .backButton {
-  color: var(--text);
-  border-color: rgba(0, 0, 0, 0.15);
-}
-
-.backButton::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
-  z-index: 0;
-}
-
-:global(.light-mode) .backButton::before {
-  background: var(--accent);
-}
-
-.backButton:hover {
-  color: rgb(255, 255, 255);
-  border-color: var(--accent);
-}
-
-.backButton:hover::before {
-  transform: scaleX(1);
-}
-
-:global(.light-mode) .backButton:hover {
-  color: var(--bg);
-  border-color: var(--accent);
-}
-
-.backButton:active {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
-}
-
-:global(.light-mode) .backButton:active {
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-}
-
-.buttonIcon {
-  font-size: 1.25rem;
-  position: relative;
-  z-index: 1;
-  transition: transform 0.4s ease;
-}
-
-.backButton:hover .buttonIcon {
-  transform: translateX(-3px);
-}
-
-.buttonText {
-  position: relative;
-  z-index: 1;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   .notFoundSection {
@@ -213,15 +130,6 @@ html.light-mode .notFoundImage {
   .description {
     font-size: 1rem;
     margin-bottom: 2rem;
-  }
-
-  .backButton {
-    padding: 1rem 2rem;
-    font-size: 0.9rem;
-  }
-
-  .buttonIcon {
-    font-size: 1.125rem;
   }
 
   .imageWrapper {
@@ -242,15 +150,5 @@ html.light-mode .notFoundImage {
   .description {
     font-size: 0.875rem;
     line-height: 1.6;
-  }
-
-  .backButton {
-    padding: 0.875rem 1.75rem;
-    font-size: 0.85rem;
-    gap: 0.75rem;
-  }
-
-  .buttonIcon {
-    font-size: 1rem;
   }
 }
