@@ -205,7 +205,7 @@ body {
 }
 
 .btn-secondary:hover {
-  color: #fff;
+  color: var(--accent);
   border-color: var(--accent);
 }
 
