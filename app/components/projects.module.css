@@ -162,9 +162,9 @@
   border-radius: 10px;
   display: grid;
   place-items: center;
-  color: var(--text);
-  background: rgba(6, 182, 212, 0.08);
-  border: 1px solid rgba(6, 182, 212, 0.2);
+  color: var(--bg);
+  background: var(--accent);
+  border: 1px solid var(--accent);
   opacity: 0;
   transform: translateY(-6px) scale(0.95);
   transition: all 0.3s ease;
@@ -174,8 +174,9 @@
 .projectCard:hover .projectLinkIcon {
   opacity: 1;
   transform: translateY(0) scale(1);
-  color: var(--accent);
-  border-color: rgba(6, 182, 212, 0.4);
+  color: var(--bg);
+  background: var(--accent);
+  border-color: var(--accent);
 }
 
 .projectContent {
