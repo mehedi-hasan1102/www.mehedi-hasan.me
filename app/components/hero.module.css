@@ -91,6 +91,7 @@
   text-transform: uppercase;
   font-family: 'Staatliches', serif;
   color: var(--text);
+  white-space: nowrap;
 }
 
 .heroTitleAccent {
@@ -101,6 +102,7 @@
   text-transform: uppercase;
   color: var(--accent);
   font-family: 'Staatliches', serif;
+  white-space: nowrap;
 }
 
 .heroDescription {
