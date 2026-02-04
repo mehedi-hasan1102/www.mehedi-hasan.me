@@ -7,6 +7,7 @@ import Skills from './components/Skills';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
+import DiagonalMarquee from './components/DiagonalMarquee';
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <main>
         <Hero />
         <About />
+        <DiagonalMarquee />
         <Skills />
         <Experience />
         <Projects />
