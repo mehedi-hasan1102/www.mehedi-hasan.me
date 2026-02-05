@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 // import ThemeToggle from "./components/ThemeToggle";
 import Navbar from "./components/Navbar";
+import Contact from "./components/Contact";
 
 export const metadata: Metadata = {
   title: "Mehedi Hasan | Developer, Storyteller & Technical Writer",
@@ -20,6 +21,7 @@ export default function RootLayout({
         <Navbar />
         {/* <ThemeToggle /> */}
         {children}
+        <Contact />
       </body>
     </html>
   );
