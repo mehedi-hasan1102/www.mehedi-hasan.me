@@ -6,13 +6,14 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   FiGithub, 
-  FiTwitter, 
   FiLinkedin, 
   FiInstagram, 
   FiYoutube, 
-  FiExternalLink 
+  FiExternalLink,
+  FiMessageCircle
 } from 'react-icons/fi';
-import { SiDribbble } from 'react-icons/si';
+import { SiDribbble, SiX, SiDevdotto, SiCodepen, SiTelegram, SiBluesky, SiMedium } from 'react-icons/si';
+import { FaWhatsapp } from 'react-icons/fa';
 import styles from './social.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -102,9 +103,6 @@ const SocialCard = ({
             <h3 className={styles.socialName}>{profile.name}</h3>
           </div>
           <p className={styles.socialUsername}>{profile.username}</p>
-          <div className={styles.socialMeta}>
-            <span className={styles.socialFollowers}>{profile.followers} Followers</span>
-          </div>
         </div>
         <div className={styles.socialBorder} />
       </div>
@@ -123,11 +121,11 @@ const SOCIAL_PROFILES = [
     description: 'Check out my open source projects and code repositories'
   },
   {
-    name: 'Twitter',
+    name: 'X',
     username: '@mehedihasan1102',
     followers: '5.2K',
     url: 'https://x.com/mehedihasan1102',
-    icon: FiTwitter,
+    icon: SiX,
     color: '#1DA1F2',
     description: 'Follow me for web development insights and tech tips'
   },
@@ -142,30 +140,84 @@ const SOCIAL_PROFILES = [
   },
   {
     name: 'Instagram',
-    username: '@devfolio',
+    username: '@mehedi.hasan1102',
     followers: '8.4K',
-    url: 'https://instagram.com/devfolio',
+    url: 'https://instagram.com/mehedi.hasan1102',
     icon: FiInstagram,
     color: '#E1306C',
     description: 'Follow my design and development journey'
   },
   {
     name: 'YouTube',
-    username: '@devfolio',
+    username: '@MehediHasan11023',
     followers: '12K',
-    url: 'https://youtube.com/@devfolio',
+    url: 'https://www.youtube.com/@MehediHasan11023',
     icon: FiYoutube,
     color: '#FF0000',
     description: 'Subscribe for programming tutorials and content'
   },
   {
     name: 'Dribble',
-    username: '@devfolio',
+    username: '@mehedi-hasan1102',
     followers: '1.8K',
-    url: 'https://dribbble.com/devfolio',
+    url: 'https://dribbble.com/mehedi-hasan1102',
     icon: SiDribbble,
     color: '#EA4C89',
     description: 'Explore my design work and creative projects'
+  },
+  {
+    name: 'Dev.to',
+    username: 'mehedihasan1102',
+    followers: '1.2K',
+    url: 'https://dev.to/mehedihasan1102',
+    icon: SiDevdotto,
+    color: '#0A0A0A',
+    description: 'Read my articles about web development'
+  },
+  {
+    name: 'CodePen',
+    username: 'mehedihasan1102',
+    followers: '500',
+    url: 'https://codepen.io/mehedihasan1102',
+    icon: SiCodepen,
+    color: '#000000',
+    description: 'Check out my code pens and experiments'
+  },
+  {
+    name: 'WhatsApp',
+    username: '+880 1747 874773',
+    followers: 'Chat',
+    url: 'https://wa.me/8801747874773',
+    icon: FaWhatsapp,
+    color: '#25D366',
+    description: 'Message me on WhatsApp'
+  },
+  {
+    name: 'Telegram',
+    username: '+880 1747 874773',
+    followers: 'Chat',
+    url: 'https://t.me/+8801747874773',
+    icon: SiTelegram,
+    color: '#0088cc',
+    description: 'Connect with me on Telegram'
+  },
+  {
+    name: 'Bluesky',
+    username: 'mehedihasan1102',
+    followers: '800',
+    url: 'https://bsky.app/profile/mehedihasan1102.bsky.social',
+    icon: SiBluesky,
+    color: '#1185fe',
+    description: 'Follow me on Bluesky'
+  },
+  {
+    name: 'Medium',
+    username: '@mehedihasan1102',
+    followers: '500',
+    url: 'https://medium.com/@mehedihasan1102',
+    icon: SiMedium,
+    color: '#000000',
+    description: 'Read my technical articles and stories'
   },
 ];
 
