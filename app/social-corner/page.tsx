@@ -10,7 +10,7 @@ import {
   FiInstagram, 
   FiYoutube, 
   FiExternalLink,
-  FiMessageCircle
+  
 } from 'react-icons/fi';
 import { SiDribbble, SiX, SiDevdotto, SiCodepen, SiTelegram, SiBluesky, SiMedium } from 'react-icons/si';
 import { FaWhatsapp } from 'react-icons/fa';
@@ -18,11 +18,20 @@ import styles from './social.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+type SocialProfile = {
+  name: string;
+  username: string;
+  url: string;
+  icon: React.ComponentType<{ size?: number }>;
+  color: string;
+  description: string;
+};
+
 const SocialCard = ({
   profile,
   index,
 }: {
-  profile: any;
+  profile: SocialProfile;
   index: number;
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -111,114 +120,113 @@ const SocialCard = ({
 };
 
 const SOCIAL_PROFILES = [
+  // 💻 Code & Open Source
   {
     name: 'GitHub',
     username: '@mehedi-hasan1102',
-    followers: '2.5K',
     url: 'https://github.com/mehedi-hasan1102',
     icon: FiGithub,
     color: '#ffffff',
-    description: 'Check out my open source projects and code repositories'
-  },
-  {
-    name: 'X',
-    username: '@mehedihasan1102',
-    followers: '5.2K',
-    url: 'https://x.com/mehedihasan1102',
-    icon: SiX,
-    color: '#1DA1F2',
-    description: 'Follow me for web development insights and tech tips'
-  },
-  {
-    name: 'LinkedIn',
-    username: 'in/mehedi-hasan1102',
-    followers: '3.1K',
-    url: 'https://www.linkedin.com/in/mehedi-hasan1102',
-    icon: FiLinkedin,
-    color: '#0A66C2',
-    description: 'Connect with me professionally'
-  },
-  {
-    name: 'Instagram',
-    username: '@mehedi.hasan1102',
-    followers: '8.4K',
-    url: 'https://instagram.com/mehedi.hasan1102',
-    icon: FiInstagram,
-    color: '#E1306C',
-    description: 'Follow my design and development journey'
-  },
-  {
-    name: 'YouTube',
-    username: '@MehediHasan11023',
-    followers: '12K',
-    url: 'https://www.youtube.com/@MehediHasan11023',
-    icon: FiYoutube,
-    color: '#FF0000',
-    description: 'Subscribe for programming tutorials and content'
-  },
-  {
-    name: 'Dribble',
-    username: '@mehedi-hasan1102',
-    followers: '1.8K',
-    url: 'https://dribbble.com/mehedi-hasan1102',
-    icon: SiDribbble,
-    color: '#EA4C89',
-    description: 'Explore my design work and creative projects'
-  },
-  {
-    name: 'Dev.to',
-    username: 'mehedihasan1102',
-    followers: '1.2K',
-    url: 'https://dev.to/mehedihasan1102',
-    icon: SiDevdotto,
-    color: '#0A0A0A',
-    description: 'Read my articles about web development'
+    description: 'Open-source projects, repositories, and experiments'
   },
   {
     name: 'CodePen',
     username: 'mehedihasan1102',
-    followers: '500',
     url: 'https://codepen.io/mehedihasan1102',
     icon: SiCodepen,
     color: '#000000',
-    description: 'Check out my code pens and experiments'
+    description: 'Frontend experiments, demos, and code snippets'
   },
+
+  // ✍️ Writing & Learning
   {
-    name: 'WhatsApp',
-    username: '+880 1747 874773',
-    followers: 'Chat',
-    url: 'https://wa.me/8801747874773',
-    icon: FaWhatsapp,
-    color: '#25D366',
-    description: 'Message me on WhatsApp'
-  },
-  {
-    name: 'Telegram',
-    username: '+880 1747 874773',
-    followers: 'Chat',
-    url: 'https://t.me/+8801747874773',
-    icon: SiTelegram,
-    color: '#0088cc',
-    description: 'Connect with me on Telegram'
-  },
-  {
-    name: 'Bluesky',
+    name: 'Dev.to',
     username: 'mehedihasan1102',
-    followers: '800',
-    url: 'https://bsky.app/profile/mehedihasan1102.bsky.social',
-    icon: SiBluesky,
-    color: '#1185fe',
-    description: 'Follow me on Bluesky'
+    url: 'https://dev.to/mehedihasan1102',
+    icon: SiDevdotto,
+    color: '#0A0A0A',
+    description: 'Articles and tutorials on web development'
   },
   {
     name: 'Medium',
     username: '@mehedihasan1102',
-    followers: '500',
     url: 'https://medium.com/@mehedihasan1102',
     icon: SiMedium,
     color: '#000000',
-    description: 'Read my technical articles and stories'
+    description: 'Technical writing and development stories'
   },
+
+  // 🎨 Design
+  {
+    name: 'Dribbble',
+    username: '@mehedi-hasan1102',
+    url: 'https://dribbble.com/mehedi-hasan1102',
+    icon: SiDribbble,
+    color: '#EA4C89',
+    description: 'UI/UX designs and creative visuals'
+  },
+
+  // 💼 Professional
+  {
+    name: 'LinkedIn',
+    username: 'in/mehedi-hasan1102',
+    url: 'https://www.linkedin.com/in/mehedi-hasan1102',
+    icon: FiLinkedin,
+    color: '#0A66C2',
+    description: 'Professional profile, experience, and networking'
+  },
+
+  // 🎥 Content & Social
+  {
+    name: 'YouTube',
+    username: '@MehediHasan11023',
+    url: 'https://www.youtube.com/@MehediHasan11023',
+    icon: FiYoutube,
+    color: '#FF0000',
+    description: 'Programming tutorials, projects, and dev content'
+  },
+  {
+    name: 'X',
+    username: '@mehedihasan1102',
+    url: 'https://x.com/mehedihasan1102',
+    icon: SiX,
+    color: '#1DA1F2',
+    description: 'Web development tips, thoughts, and tech updates'
+  },
+  {
+    name: 'Bluesky',
+    username: 'mehedihasan1102',
+    url: 'https://bsky.app/profile/mehedihasan1102.bsky.social',
+    icon: SiBluesky,
+    color: '#1185fe',
+    description: 'Tech discussions and updates on Bluesky'
+  },
+  {
+    name: 'Instagram',
+    username: '@mehedi.hasan1102',
+    url: 'https://instagram.com/mehedi.hasan1102',
+    icon: FiInstagram,
+    color: '#E1306C',
+    description: 'Developer life, UI inspiration, and creative work'
+  },
+
+  // 📞 Direct Contact
+  {
+    name: 'WhatsApp',
+    username: '+880 1747 874773',
+    url: 'https://wa.me/8801747874773',
+    icon: FaWhatsapp,
+    color: '#25D366',
+    description: 'Direct communication via WhatsApp'
+  },
+  {
+    name: 'Telegram',
+    username: '+880 1747 874773',
+    url: 'https://t.me/+8801747874773',
+    icon: SiTelegram,
+    color: '#0088cc',
+    description: 'Chat with me on Telegram'
+  }
 ];
 
 export default function SocialCorner() {
