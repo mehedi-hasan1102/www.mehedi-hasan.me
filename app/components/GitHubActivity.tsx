@@ -77,6 +77,7 @@ export default function GitHubActivity() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const graphRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -108,6 +109,8 @@ export default function GitHubActivity() {
         },
         opacity: 0,
         y: 40,
+        rotateX: -10,
+        scale: 0.9,
         duration: 1,
         ease: 'power3.out',
         delay: 0.2,
@@ -117,28 +120,54 @@ export default function GitHubActivity() {
     return () => ctx.revert();
   }, [loading]);
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!graphRef.current || !glowRef.current) return;
+    const rect = graphRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    gsap.to(glowRef.current, {
+      x: x,
+      y: y,
+      duration: 0.3,
+      ease: 'power2.out',
+    });
+  };
+
   if (loading) {
     return <GitHubActivitySkeleton />;
   }
 
   return (
     <section ref={sectionRef} className={styles.section}>
+      {/* Gradient Orbs Background */}
+      <div className={`${styles.orb} ${styles.orb1}`} />
+      <div className={`${styles.orb} ${styles.orb2}`} />
+      <div className={`${styles.orb} ${styles.orb3}`} />
+
       <div className={styles.container}>
         {/* Header */}
         <div ref={headerRef} className={styles.header}>
           <h2 className={styles.title}>GitHub <span className={styles.accentText}>Activity</span></h2>
-          
         </div>
 
         {/* Contribution Graph */}
-        <div ref={graphRef} className={styles.graphContainer}>
+        <div 
+          ref={graphRef} 
+          className={styles.graphContainer}
+          onMouseMove={handleMouseMove}
+        >
           <div className={styles.graphWrapper}>
-            <img
-              src="https://ghchart.rshah.org/22d3ee/mehedi-hasan1102"
-              alt="GitHub contribution graph"
-              className={styles.graph}
-              loading="lazy"
-            />
+            <div ref={glowRef} className={styles.graphGlow} />
+            <div className={styles.graphContent}>
+              <img
+                src="https://ghchart.rshah.org/22d3ee/mehedi-hasan1102"
+                alt="GitHub contribution graph"
+                className={styles.graph}
+                loading="lazy"
+              />
+            </div>
+            <div className={styles.graphBorder} />
           </div>
         </div>
       </div>
