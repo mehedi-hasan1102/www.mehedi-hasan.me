@@ -1,5 +1,6 @@
 import About from "../components/About";
 import Experience from "../components/Experience";
+import GitHubActivity from '../components/GitHubActivity';
 
 
 export default function whoami() {
@@ -8,7 +9,11 @@ export default function whoami() {
    
    <About />
        
-        <Experience />
+
+     
+        <Experience  />
+      
+        <GitHubActivity />
     
     </div>
   );

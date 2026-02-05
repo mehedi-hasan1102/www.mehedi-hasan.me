@@ -126,10 +126,8 @@ export default function GitHubActivity() {
       <div className={styles.container}>
         {/* Header */}
         <div ref={headerRef} className={styles.header}>
-          <h2 className={styles.title}>GitHub Activity</h2>
-          <p className={styles.description}>
-            A snapshot of my open-source contributions.
-          </p>
+          <h2 className={styles.title}>GitHub <span className={styles.accentText}>Activity</span></h2>
+          
         </div>
 
         {/* Contribution Graph */}
